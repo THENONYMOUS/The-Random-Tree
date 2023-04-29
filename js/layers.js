@@ -27,7 +27,9 @@ addLayer("p", {
     layerShown(){return true},
     upgrades: {
         11: {
-
+            title: "increase point gain based on SP",
+            description: "how cool!",
+            cost: new Decimal(2),
         },
     },
 })
