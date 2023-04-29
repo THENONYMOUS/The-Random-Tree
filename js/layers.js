@@ -15,6 +15,7 @@ addLayer("p", {
     exponent: 0.5, // Prestige currency exponent
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
+        if (hasUpgrade('p', 14)) mult = mult.times(upgradeEffect('p', 14))
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
@@ -36,7 +37,7 @@ addLayer("p", {
             description: "complex...",
             cost: new Decimal(5),
             effect() {
-                return player.points.add(1).pow(0.1)
+                return player.points.add(1).pow(0.3)
             },
             effectDisplay() { return format (upgradeEffect(this.layer, this.id))+"x" },
         },
@@ -46,6 +47,15 @@ addLayer("p", {
             cost: new Decimal(20),
             effect () {
                 return player[this.layer].points.add(1).pow(0.3)
+            },
+            effectDisplay() { return format (upgradeEffect(this.layer, this.id))+"x" },
+        },
+        14: {
+            title: "Increase SP gain based on points",
+            description: "",
+            cost: new Decimal(50),
+            effect () {
+                return player.points.add(1).pow(0.1)
             },
             effectDisplay() { return format (upgradeEffect(this.layer, this.id))+"x" },
         },
