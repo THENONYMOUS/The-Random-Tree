@@ -24,5 +24,10 @@ addLayer("p", {
     hotkeys: [
         {key: "s", description: "P: Reset for superpositions", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
-    layerShown(){return true}
+    layerShown(){return true},
+    upgrades: {
+        11: {
+
+        },
+    },
 })
