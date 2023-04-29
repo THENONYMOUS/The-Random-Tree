@@ -15,6 +15,7 @@ addLayer("p", {
     exponent: 0.25, // Prestige currency exponent
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
+        if (hasUpgrade('p', 11) gain = gain.times (3)
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
@@ -27,7 +28,7 @@ addLayer("p", {
     layerShown(){return true},
     upgrades: {
         11: {
-            title: "increase point gain based on SP",
+            title: "Triple Point Gain",
             description: "how cool!",
             cost: new Decimal(2),
         },
