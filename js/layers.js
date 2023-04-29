@@ -105,6 +105,20 @@ addLayer("e", {
             requirementDescription: "1 Entanglement",
             effectDescription: "Raise SP mult ^1.05",
             done() { return player.e.points.gte(1) }
-        }
+        },
+        1: {
+            requirementDescription: "10 Entanglement",
+            effectDescription: "Unlock a Challenge",
+            done() { return player.e.points.gte(10) },
+        },
+    },
+    challenges: {
+        11: {
+            name: "slowdown",
+            challengeDescription: "Point gain is raised to the power ^0.5",
+            goalDescription: "reach 10,000 points",
+            unlocked: function() {return hasMilestone('e', 1)},
+            canComplete: function() {return player.points.gte("1e4")},
+        },
     },
 })
