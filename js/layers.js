@@ -117,6 +117,7 @@ addLayer("e", {
             name: "slowdown",
             challengeDescription: "Point gain is raised to the power ^0.5",
             goalDescription: "reach 10,000 points",
+            rewardDescription: "Point gain is raised to the power ^1.5",
             unlocked: function() {return hasMilestone('e', 1)},
             canComplete: function() {return player.points.gte("1e4")},
         },
