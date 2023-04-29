@@ -17,6 +17,7 @@ addLayer("p", {
         mult = new Decimal(1)
         if (hasUpgrade('p', 14)) mult = mult.times(upgradeEffect('p', 14))
         if (hasMilestone('e', 0)) mult = mult.pow(1.05)
+        if (hasUpgrade('p', 21)) mult = mult.pow(1.1)
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
@@ -60,6 +61,11 @@ addLayer("p", {
             },
             effectDisplay() { return format (upgradeEffect(this.layer, this.id))+"x" },
         },
+        21: {
+            title: "Raise SP gain to the power ^1.1",
+            description: "",
+            cost: new Decimal(1000),
+        }
     },
 })
 addLayer("e", {
