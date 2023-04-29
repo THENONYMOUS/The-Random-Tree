@@ -94,7 +94,7 @@ addLayer("e", {
             description: "huh",
             cost: new Decimal(1),
             effect () {
-                return player.points.add(1).pow(0.5)
+                return player.points.add(1).pow(0.3)
             },
             effectDisplay() { return format (upgradeEffect(this.layer, this.id))+"x" }
         },
