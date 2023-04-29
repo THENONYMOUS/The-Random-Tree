@@ -16,6 +16,7 @@ addLayer("p", {
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
         if (hasUpgrade('p', 14)) mult = mult.times(upgradeEffect('p', 14))
+        if (hasMilestone('e', 0)) mult = mult.pow(1.05)
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
@@ -98,5 +99,12 @@ addLayer("e", {
             },
             effectDisplay() { return format (upgradeEffect(this.layer, this.id))+"x" }
         },
+    },
+    milestones: {
+        0: {
+            requirementDescription: "1 Entanglement",
+            effectDescription: "Raise SP mult ^1.05",
+            done() { return player.e.points.gte(1) }
+        }
     },
 })
