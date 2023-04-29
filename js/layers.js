@@ -121,7 +121,7 @@ addLayer("e", {
     challenges: {
         11: {
             name: "slowdown",
-            challengeDescription: "Point gain is raised to the power ^0.5",
+            challengeDescription: "Point gain is raised to the power ^0.55",
             goalDescription: "reach 1,000 points",
             rewardDescription: "Point gain is raised to the power ^1.1",
             unlocked: function() {return hasMilestone('e', 1)},
