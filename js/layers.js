@@ -49,7 +49,7 @@ addLayer("p", {
             description: "Interesting...",
             cost: new Decimal(20),
             effect () {
-                return player[this.layer].points.add(1).pow(0.3)
+                return player[this.layer].points.add(1).pow(0.35)
             },
             effectDisplay() { return format (upgradeEffect(this.layer, this.id))+"x" },
         },
