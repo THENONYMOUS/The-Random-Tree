@@ -16,6 +16,7 @@ addLayer("p", {
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
         if (hasUpgrade('p', 14)) mult = mult.times(upgradeEffect('p', 14))
+        if (hasChallenge('e', 12)) mult = mult.times(player.e.points.pow(0.1))
         if (hasMilestone('e', 0)) mult = mult.pow(1.05)
         if (hasUpgrade('p', 21)) mult = mult.pow(1.1)
         return mult
@@ -117,6 +118,11 @@ addLayer("e", {
             effectDescription: "Unlock a Challenge",
             done() { return player.e.points.gte(10) },
         },
+        2: {
+            requirementDescription: "50 Entanglement",
+            effectDescription: "Unlock a second Challenge",
+            done() { return player.e.points.gte(50)},
+        },
     },
     challenges: {
         11: {
@@ -125,6 +131,14 @@ addLayer("e", {
             goalDescription: "reach 1,000 points",
             rewardDescription: "Point gain is boosted based on entanglements",
             unlocked: function() {return hasMilestone('e', 1)},
+            canComplete: function() {return player.points.gte("1e3")},
+        },
+        12: {
+            name: "softcapped",
+            challengeDescription: "Point gain is divided by current points",
+            goalDescription: "reach 1,000 points",
+            rewardDescription: "multiply SP gain based on Entanglement",
+            unlocked: function() {return hasMilestone('e', 2)},
             canComplete: function() {return player.points.gte("1e3")},
         },
     },
