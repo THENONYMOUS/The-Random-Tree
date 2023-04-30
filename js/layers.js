@@ -16,7 +16,7 @@ addLayer("p", {
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
         if (hasUpgrade('p', 14)) mult = mult.times(upgradeEffect('p', 14))
-        if (hasChallenge('e', 12)) mult = mult.times(player.e.points.pow(0.1))
+        if (hasChallenge('e', 12)) mult = mult.times(player.e.points.pow(0.05))
         if (hasUpgrade('p',22)) mult = mult.times(upgradeEffect('p', 22))
         if (hasMilestone('e', 0)) mult = mult.pow(1.05)
         if (hasUpgrade('p', 21)) mult = mult.pow(1.1)
@@ -73,7 +73,7 @@ addLayer("p", {
             description: "",
             cost: new Decimal(2500),
             effect () {
-                return player.p.points.add(1).pow(0.1)
+                return player.p.points.add(1).pow(0.05)
             },
             effectDisplay() { return format (upgradeEffect(this.layer, this.id))+"x"},
         },
@@ -120,9 +120,9 @@ addLayer("e", {
         12: {
             title: "Multiply Entanglement gain based on SP",
             description: "^0.1",
-            cost: new Decimal(75),
+            cost: new Decimal(250),
             effect () {
-                return player.p.points.add(1).pow(0.1)
+                return player.p.points.add(1).pow(0.07)
             },
             effectDisplay() { return format (upgradeEffect(this.layer, this.id))+"x"}
         },
