@@ -127,7 +127,7 @@ addLayer("e", {
             unlocked: function() {return hasMilestone('e', 1)},
             canComplete: function() {return player.points.gte("1e3")},
             effect() {return player.e.points.add(1).times(1000).pow(0.1)},
-            effectDisplay() {return format (rewardEffect(this.layer, this.id))+"x"},
+            effectDisplay() {return format (rewardEffect(this.layer, this.id))+"x" },
         },
     },
 })
