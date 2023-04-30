@@ -16,7 +16,6 @@ addLayer("p", {
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
         if (hasUpgrade('p', 14)) mult = mult.times(upgradeEffect('p', 14))
-        if (hasChallenge('e', 12)) mult = mult.times(player.e.points.pow(0.05))
         if (hasUpgrade('p',22)) mult = mult.times(upgradeEffect('p', 22))
         if (hasMilestone('e', 0)) mult = mult.pow(1.05)
         if (hasUpgrade('p', 21)) mult = mult.pow(1.1)
@@ -149,17 +148,18 @@ addLayer("e", {
             name: "slowdown",
             challengeDescription: "Point gain is raised to the power ^0.55",
             goalDescription: "reach 1,000 points",
-            rewardDescription: "Point gain is boosted based on entanglements",
+            rewardDescription() {return format ("Point gain is boosted based on entanglements. Currently: x"+(player.e.points.add(1).times(100).pow(0.25)))},
             unlocked: function() {return hasMilestone('e', 1)},
             canComplete: function() {return player.points.gte("1e3")},
         },
         12: {
             name: "softcapped",
             challengeDescription: "Point gain is divided by current points",
-            goalDescription: "reach 500 points",
-            rewardDescription: "multiply SP gain based on Entanglement",
+            goalDescription() {return format (challengeCompletions('e', 12).add(1).times(500))},
+            rewardDescription() {return format ("Increase Base gain based on Entanglement. Currently: +"+(player.e.points.pow(0.3).times(challengeCompletions('e', 12))))},
+            completionLimit: 3,
             unlocked: function() {return hasMilestone('e', 2)},
-            canComplete: function() {return player.points.gte("500")},
+            canComplete: function() {return player.points.gte(challengeCompletions('e', 12).add(1).times(500))},
         },
     },
 })
