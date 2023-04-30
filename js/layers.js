@@ -17,6 +17,7 @@ addLayer("p", {
         mult = new Decimal(1)
         if (hasUpgrade('p', 14)) mult = mult.times(upgradeEffect('p', 14))
         if (hasChallenge('e', 12)) mult = mult.times(player.e.points.pow(0.1))
+        if (hasUpgrade('p',22)) mult = mult.times(upgradeEffect('p', 22))
         if (hasMilestone('e', 0)) mult = mult.pow(1.05)
         if (hasUpgrade('p', 21)) mult = mult.pow(1.1)
         return mult
@@ -63,10 +64,19 @@ addLayer("p", {
             effectDisplay() { return format (upgradeEffect(this.layer, this.id))+"x" },
         },
         21: {
-            title: "Raise SP gain to the power ^1.1",
+            title: "Raise SP mult to the power ^1.1",
             description: "",
             cost: new Decimal(1000),
-        }
+        },
+        22: {
+            title: "Multiply SP gain based on SP",
+            description: "",
+            cost: new Decimal(2500),
+            effect () {
+                return player.p.points.add(1).pow(0.2)
+            },
+            effectDisplay() { return format (upgradeEffect(this.layer, this.id))+"x"},
+        },
     },
 })
 addLayer("e", {
@@ -86,6 +96,7 @@ addLayer("e", {
     exponent: 0.6, // Prestige currency exponent
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
+        if (hasUpgrade('e', 12)) mult = mult.times(upgradeEffect('e', 12))
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
@@ -105,6 +116,15 @@ addLayer("e", {
                 return player.points.add(1).pow(0.3)
             },
             effectDisplay() { return format (upgradeEffect(this.layer, this.id))+"x" }
+        },
+        12: {
+            title: "Multiply Entanglement gain based on SP",
+            description: "^0.1",
+            cost: new Decimal(75),
+            effect () {
+                return player.p.points.add(1).pow(0.1)
+            },
+            effectDisplay() { return format (upgradeEffect(this.layer, this.id))+"x"}
         },
     },
     milestones: {
