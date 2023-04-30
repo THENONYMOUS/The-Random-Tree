@@ -149,7 +149,7 @@ addLayer("e", {
             challengeDescription: "Point gain is raised to the power ^0.55",
             goalDescription: "reach 1,000 points",
             rewardDescription() {return ("Point gain is boosted based on entanglements. Currently: x"+(player.e.points.add(1).times(100).pow(0.25)))},
-            unlocked: function() {return hasMilestone('e', 1)},
+            unlocked: function() { return hasMilestone('e', 1)},
             canComplete: function() {return player.points.gte("1e3")},
         },
         12: {
