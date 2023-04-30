@@ -136,10 +136,10 @@ addLayer("e", {
         12: {
             name: "softcapped",
             challengeDescription: "Point gain is divided by current points",
-            goalDescription: "reach 1,000 points",
+            goalDescription: "reach 500 points",
             rewardDescription: "multiply SP gain based on Entanglement",
             unlocked: function() {return hasMilestone('e', 2)},
-            canComplete: function() {return player.points.gte("1e3")},
+            canComplete: function() {return player.points.gte("500")},
         },
     },
 })
