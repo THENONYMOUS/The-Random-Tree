@@ -55,6 +55,7 @@ function getPointGen() {
 }
 	if (inChallenge('e', 11)) gain = gain.pow(0.55)
 	if (inChallenge('e', 12)) gain = gain.dividedBy(player.points.add(1))
+	if (inChallenge('e', 21)) gain = gain.dividedBy(player.points.add(1).pow(2))
 	return gain
 }
 
@@ -68,7 +69,7 @@ var displayThings = [
 
 // Determines when the game "ends"
 function isEndgame() {
-	return hasChallenge('p', 11)
+	return hasChallenge('e', 21)
 }
 
 

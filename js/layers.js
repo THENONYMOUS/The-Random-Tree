@@ -197,5 +197,12 @@ addLayer("e", {
             unlocked: function () { return hasMilestone('e', 2) },
             canComplete: function () { return player.points.gte(new Decimal(challengeCompletions('e', 12)).add(1).times(500)) },
         },
+        21: {
+            name: "the final test",
+            challengeDescription: "Point gain is divided by points squared",
+            goalDescription: "Get all SP upgrades",
+            rewardDescription: "finish the game",
+            canComplete: function() {return hasUpgrade('p', 24)},
+        },
     },
 })
