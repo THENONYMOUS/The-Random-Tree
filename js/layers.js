@@ -157,7 +157,7 @@ addLayer("e", {
             canComplete: function () { return player.points.gte("1e3") },
         },
         12: {
-            name: "softcapped",
+            name: "softcapped (repeatable)",
             challengeDescription: "Point gain is divided by current points",
             goalDescription: function () { return format(new Decimal(challengeCompletions('e', 12)).add(1).times(500))+" Points"},
             rewardDescription: function () { return "Increase Base gain based on Entanglement. Currently: +" + format(player.e.points.pow(0.3).times(new Decimal(challengeCompletions('e', 12)))) },
