@@ -42,7 +42,7 @@ addLayer("p", {
             description: "complex...",
             cost: new Decimal(5),
             effect() {
-                return player.points.add(1).pow(0.3)
+                return player.points.add(1).pow(0.26)
             },
             effectDisplay() { return format(upgradeEffect(this.layer, this.id)) + "x" },
         },
@@ -116,7 +116,7 @@ addLayer("e", {
             description: "huh",
             cost: new Decimal(1),
             effect() {
-                return player.points.add(1).pow(0.3)
+                return player.points.add(1).pow(0.25)
             },
             effectDisplay() { return format(upgradeEffect(this.layer, this.id)) + "x" }
         },
@@ -152,7 +152,7 @@ addLayer("e", {
             name: "slowdown",
             challengeDescription: "Point gain is raised to the power ^0.55",
             goalDescription: "reach 1,000 points",
-            rewardDescription: function () { return ("Point gain is boosted based on entanglements. Currently: x" + format(player.e.points.add(1).times(100).pow(0.25))) },
+            rewardDescription: function () { return ("Point gain is boosted based on entanglements. Currently: x" + format(player.e.points.add(1).times(10).pow(0.25))) },
             unlocked: function () { return hasMilestone('e', 1) },
             canComplete: function () { return player.points.gte("1e3") },
         },
