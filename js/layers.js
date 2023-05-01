@@ -78,7 +78,33 @@ addLayer("p", {
             },
             effectDisplay() { return format(upgradeEffect(this.layer, this.id)) + "x" },
         },
+        23: {
+            title: "Unlock a Challenge",
+            description: "",
+            cost: new Decimal(1000000),
+            unlocked() {return hasUpgrade('e', 13)},
+        },
+        24: {
+            title: "Multiply Entanglement gain based on points",
+            description: "",
+            cost: new Decimal("2.5e7"),
+            unlocked() {return hasUpgrade('e', 13)},
+            effect() {
+                return player.points.add(1).pow(0.01)
+            },
+            effectDisplay() { return format(upgradeEffect(this.layer, this.id)) + "x"},
+        }
     },
+    challenges: {
+        11: {
+            name: "Powers",
+            challengeDescription: "Remove all point Multipliers",
+            goalDescription: "reach 5,000 points",
+            rewardDescription: "Multiply point gain by 3",
+            unlocked() {return hasUpgrade('p', 23)},
+            canComplete() {return player.points.gte(5000)},
+        }
+    }
 })
 addLayer("e", {
     name: "entanglement", // This is optional, only used in a few places, If absent it just uses the layer id.
@@ -128,6 +154,11 @@ addLayer("e", {
                 return player.p.points.add(1).pow(0.07)
             },
             effectDisplay() { return format(upgradeEffect(this.layer, this.id)) + "x" }
+        },
+        13: {
+            title: "unlock 2 new Prestige upgrades",
+            description: "",
+            cost: new Decimal(1000),
         },
     },
     milestones: {
