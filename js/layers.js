@@ -200,9 +200,10 @@ addLayer("e", {
         21: {
             name: "the final test",
             challengeDescription: "Point gain is divided by points squared but point gain is multiplied by SP+1",
-            goalDescription: "Reach 1,000,000 Points",
+            goalDescription: "Complete 'Powers'",
             rewardDescription: "finish the game",
-            canComplete: function() {return player.points.gte(1000000)},
+            unlocked: function() {return hasChallenge('p', 11)},
+            canComplete: function() {return hasChallenge('p', 11)},
         },
     },
 })
