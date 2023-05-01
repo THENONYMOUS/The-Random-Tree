@@ -86,7 +86,7 @@ addLayer("p", {
         },
         24: {
             title: "Multiply Entanglement gain based on points",
-            description: "",
+            description: "also raises BASE point gain to this power",
             cost: new Decimal("2.5e7"),
             unlocked() {return hasUpgrade('e', 13)},
             effect() {

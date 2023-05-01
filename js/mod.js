@@ -45,6 +45,7 @@ function getPointGen() {
 	let gain = new Decimal(2)
 	if (hasUpgrade('p', 11)) gain = gain.add(2)
 	gain = gain.add(player.e.points.pow(0.3).times(new Decimal (challengeCompletions('e', 12))))
+	if (hasUpgrade('p', 24)) gain = gain.pow(upgradeEffect('p', 24))
 	if (!inChallenge('p', 11)) {
 	if (hasUpgrade('p', 12)) gain = gain.times(upgradeEffect('p', 12))
 	if (hasUpgrade('p', 13)) gain = gain.times(upgradeEffect('p', 13))
