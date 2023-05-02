@@ -43,6 +43,7 @@ function getPointGen() {
 		return new Decimal(0)
 
 	let gain = new Decimal(5)
+	gain = gain.add(new Decimal(challengeCompletions('cp', 11)).times(5))
 	return gain
 }
 
