@@ -1,6 +1,6 @@
 let modInfo = {
-	name: "The Random Tree",
-	id: "365475wef",
+	name: "The Challenge Tree",
+	id: "thechallengetree491501495",
 	author: "Thenonymous",
 	pointsName: "points",
 	modFiles: ["layers.js", "tree.js"],
@@ -14,7 +14,7 @@ let modInfo = {
 // Set your version in num and name
 let VERSION = {
 	num: "0.1",
-	name: "One Upgrade that doesn't work",
+	name: "Challenges.",
 }
 
 let changelog = `<h1>Changelog:</h1><br>
@@ -42,21 +42,7 @@ function getPointGen() {
 	if(!canGenPoints())
 		return new Decimal(0)
 
-	let gain = new Decimal(2)
-	if (hasUpgrade('p', 11)) gain = gain.add(2)
-	gain = gain.add(player.e.points.pow(0.3).times(new Decimal (challengeCompletions('e', 12))))
-	if (hasUpgrade('p', 24)) gain = gain.pow(upgradeEffect('p', 24))
-	if (!inChallenge('p', 11)) {
-	if (hasUpgrade('p', 12)) gain = gain.times(upgradeEffect('p', 12))
-	if (hasUpgrade('p', 13)) gain = gain.times(upgradeEffect('p', 13))
-	if (hasUpgrade('e', 11)) gain = gain.times(upgradeEffect('e', 11))
-	if (hasChallenge('p', 11)) gain = gain.times(3)
-	if (hasChallenge('e', 11)) gain = gain.times(player.e.points.add(1).times(10).pow(0.25))
-	if (inChallenge('e', 21)) gain = gain.times(player.p.points.add(1))
-}
-	if (inChallenge('e', 11)) gain = gain.pow(0.55)
-	if (inChallenge('e', 12)) gain = gain.dividedBy(player.points.add(1))
-	if (inChallenge('e', 21)) gain = gain.dividedBy(player.points.add(1).pow(2))
+	let gain = new Decimal(5)
 	return gain
 }
 
@@ -70,7 +56,7 @@ var displayThings = [
 
 // Determines when the game "ends"
 function isEndgame() {
-	return hasChallenge('e', 21)
+	return false
 }
 
 
