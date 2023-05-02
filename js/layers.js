@@ -40,7 +40,7 @@ addLayer("cp", {
             name: "The First Real Challenge",
             challengeDescription: "Divide Point gain by points^0.5",
             completionLimit: (5),
-            rewardDescription() {return "x"+format(player.cp.points.times(new Decimal(challengeCompletions('cp', 12))).add(1).pow(0.5))+" point gain ("+format(challengeCompletions('cp', 12))+"/5)"},
+            rewardDescription() {return "x"+format(player.cp.points.times(new Decimal(challengeCompletions('cp', 12))).add(1).pow(0.3))+" point gain ("+format(challengeCompletions('cp', 12))+"/5)"},
             goalDescription() {return "Reach "+format(new Decimal(25).times(new Decimal(2).pow(new Decimal(challengeCompletions('cp', 12)))))+" points"},
             canComplete() {return player.points.gte(new Decimal(25).times(new Decimal(2).pow(new Decimal(challengeCompletions('cp', 12)))))},
         },
