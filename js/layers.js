@@ -8,7 +8,7 @@ addLayer("cp", {
             points: new Decimal(0),
         }
     },
-    color: "#4BDC13",
+    color: "#D07A05",
     requires: new Decimal(25), // Can be a function that takes requirement increases into account
     resource: "Challenge Points", // Name of prestige currency
     baseResource: "points", // Name of resource prestige is based on
