@@ -68,7 +68,7 @@ addLayer("cp", {
             unlocked() {return new Decimal(challengeCompletions('cp', 11)).gte(10)},
             rewardDescription: "Unlock 'Powers', an adjacent layer",
             goalDescription: "Reach 1 Point/sec",
-            canComplete() {return tmp.pointGen.gte(1)},
+            canComplete() {return new Decimal(tmp.pointGen).gte(1)},
         }
     }
 })
