@@ -47,6 +47,8 @@ function getPointGen() {
 	if (inChallenge('cp', 13)) gain = new Decimal(1)
 	gain = gain.times(player.cp.points.times(new Decimal(challengeCompletions('cp', 12))).add(1).pow(0.3))
 	gain = gain.times(player.points.add(1).pow(new Decimal(challengeCompletions('cp', 13)).times(0.03)))
+	if (inChallenge('cp', 14)) gain = gain.dividedBy((challengeCompletions('cp', 14)+1)*2)
+	gain = gain.times(challengeCompletions('cp', 14)+1)
 	if (inChallenge('cp', 12)) gain = gain.dividedBy(player.points.add(1).pow(0.5))
 	return gain
 }
