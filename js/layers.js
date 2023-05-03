@@ -58,7 +58,7 @@ addLayer("cp", {
             challengeDescription() {return "Gain Divided by "+format((challengeCompletions('cp', 14)+1)*2)},
             completionLimit: (10),
             unlocked() {return player.cp.points.gte(100)},
-            rewardDescription() {return "Multiply Point Gain by Challenge Completions. ("+format(challengeCompletions('cp', 14))+"/10"},
+            rewardDescription() {return "Multiply Point Gain by Challenge Completions. ("+format(challengeCompletions('cp', 14))+"/10)"},
             goalDescription() {return "reach "+format(new Decimal(3).pow(new Decimal(challengeCompletions('cp', 14))).times(1000))+" points"},
             canComplete() {return player.points.gte(new Decimal(3).pow(new Decimal(challengeCompletions('cp', 14))).times(1000))}
         },
