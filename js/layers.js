@@ -62,5 +62,13 @@ addLayer("cp", {
             goalDescription() {return "reach "+format(new Decimal(3).pow(new Decimal(challengeCompletions('cp', 14))).times(1000))+" points"},
             canComplete() {return player.points.gte(new Decimal(3).pow(new Decimal(challengeCompletions('cp', 14))).times(1000))}
         },
+        21: {
+            name: "Pointless",
+            challengeDescription: "Point gain ^0.1 then x0.1",
+            unlocked() {return new Decimal(challengeCompletions('cp', 11)).gte(10)},
+            rewardDescription: "Unlock 'Powers', an adjacent layer",
+            goalDescription: "Reach 1 Point/sec",
+            canComplete() {return tmp.pointGen.gte(1)},
+        }
     }
 })
