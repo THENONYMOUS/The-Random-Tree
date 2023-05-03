@@ -49,7 +49,7 @@ addLayer("cp", {
             challengeDescription: "Base Gain is always 1",
             completionLimit: (10),
             unlocked() {return new Decimal(challengeCompletions('cp', 11)+challengeCompletions('cp', 12)).gte(5)},
-            rewardDescription() {return "Base gain multiplied based on points. Currently: x"+format(player.points.add(1).pow(new Decimal(challengeCompletions('cp', 13)).times(0.03)))+" ("+format(challengeCompletions('cp', 13))+"/10)"},
+            rewardDescription() {return "Gain multiplied based on points. Currently: x"+format(player.points.add(1).pow(new Decimal(challengeCompletions('cp', 13)).times(0.03)))+" ("+format(challengeCompletions('cp', 13))+"/10)"},
             goalDescription() {return "reach "+format(new Decimal(3).pow(new Decimal(challengeCompletions('cp', 13))).times(50))+" points"},
             canComplete() {return player.points.gte(new Decimal(3).pow(new Decimal(challengeCompletions('cp', 13))).times(50))},
         },
