@@ -66,9 +66,40 @@ addLayer("cp", {
             name: "Pointless",
             challengeDescription: "Point gain ^0.1 then x0.1",
             unlocked() {return new Decimal(challengeCompletions('cp', 11)).gte(10)},
-            rewardDescription: "Unlock 'Powers', an adjacent layer",
+            rewardDescription: "Unlock 'Powers', an adjacent layer which multiplies point gain by 2^Power",
             goalDescription: "Reach 1 Point/sec",
             canComplete() {return new Decimal(tmp.pointGen).gte(1)},
+        },
+    },
+}),
+addLayer("p", {
+    name: "Powers", // This is optional, only used in a few places, If absent it just uses the layer id.
+    symbol: "P", // This appears on the layer's node. Default is the id with the first letter capitalized
+    position: 1, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
+    startData() {
+        return {
+            unlocked: true,
+            points: new Decimal(0),
         }
-    }
+    },
+    color: "#D07A05",
+    requires: new Decimal(100), // Can be a function that takes requirement increases into account
+    resource: "Power", // Name of prestige currency
+    baseResource: "points", // Name of resource prestige is based on
+    baseAmount() { return player.points }, // Get the current amount of baseResource
+    type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
+    base: (10),
+    exponent: 1, // Prestige currency exponent
+    gainMult() { // Calculate the multiplier for main currency from bonuses
+        mult = new Decimal(1)
+        return mult
+    },
+    gainExp() { // Calculate the exponent on main currency from bonuses
+        return new Decimal(1)
+    },
+    row: 0, // Row the layer is in on the tree (0 is the first row)
+    hotkeys: [
+        { key: "p", description: "P: Reset for Power", onPress() { if (canReset(this.layer)) doReset(this.layer) } },
+    ],
+    layerShown() { return hasChallenge('cp', 21) },
 })
