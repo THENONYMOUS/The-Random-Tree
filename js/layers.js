@@ -22,8 +22,7 @@ addLayer("cp", {
         if (hasMilestone('sd', 0)) keptChallenges[11] = challengeCompletions(this.layer, 11);
         if (hasMilestone('sd', 0)) keptChallenges[21] = challengeCompletions(this.layer, 21);
 
-        let keep = [];
-        layerDataReset(this.layer, keep);
+        layerDataReset(this.layer);
 
         for(const [id, completions] of Object.entries(keptChallenges)) {
             player[this.layer].challenges[id] = completions;
