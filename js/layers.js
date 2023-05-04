@@ -20,9 +20,7 @@ addLayer("cp", {
 
         let kepChallenges = {};
         if (hasMilestone('sd', 0)) keptChallenges[11] = challengeCompletions(this.layer, 11);
-
-        let keep = [];
-        layerDataReset(this.layer, keep);
+        if (hasMilestone('sd', 0)) keptChallenges[21] = challengeCompletions(this.layer, 21);
 
         for(const [id, completions] of Object.entries(keptChallenges)) {
             player[this.layer].challenges[id] = completions;
@@ -148,7 +146,7 @@ addLayer("sd", {
     milestones: {
         0: {
             requirementDescription: "1 Slowdown",
-            effectDescription: "Keep Challenge 1 completions on reset",
+            effectDescription: "Keep Challenge 1 and 'Pointless' completions on reset",
             done() {return player.sd.points.gte(1)},
         },
     }
