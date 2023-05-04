@@ -15,6 +15,19 @@ addLayer("cp", {
     baseAmount() { return player.points }, // Get the current amount of baseResource
     type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
     exponent: 0.5, // Prestige currency exponent
+    doReset(resettingLayer) {
+        if (layers[resettingLayer].row <= layers[this.layer].row) return;
+
+        let kepChallenges = {};
+        if (hasMilestone('sd', 0)) keptChallenges[11] = challengeCompletions(this.layer, 11);
+
+        let keep = [];
+        layerDataReset(this.layer, keep);
+
+        for(const [id, completions] of Object.entries(keptChallenges)) {
+            player[this.layer].challenges[id] = completions;
+        }
+    },
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
         return mult
@@ -102,4 +115,41 @@ addLayer("p", {
         { key: "p", description: "P: Reset for Power", onPress() { if (canReset(this.layer)) doReset(this.layer) } },
     ],
     layerShown() { return hasChallenge('cp', 21) },
+}),
+addLayer("sd", {
+    name: "Slowdown", // This is optional, only used in a few places, If absent it just uses the layer id.
+    symbol: "SD", // This appears on the layer's node. Default is the id with the first letter capitalized
+    position: 0, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
+    startData() {
+        return {
+            unlocked: true,
+            points: new Decimal(0),
+        }
+    },
+    color: "#055FD0",
+    requires: new Decimal(3), // Can be a function that takes requirement increases into account
+    resource: "Slowdown", // Name of prestige currency
+    baseResource: "Power", // Name of resource prestige is based on
+    baseAmount() { return player.p.points }, // Get the current amount of baseResource
+    type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
+    exponent: 2, // Prestige currency exponent
+    gainMult() { // Calculate the multiplier for main currency from bonuses
+        mult = new Decimal(1)
+        return mult
+    },
+    gainExp() { // Calculate the exponent on main currency from bonuses
+        return new Decimal(1)
+    },
+    row: 1, // Row the layer is in on the tree (0 is the first row)
+    hotkeys: [
+        { key: "s", description: "S: Reset for Slowdown", onPress() { if (canReset(this.layer)) doReset(this.layer) } },
+    ],
+    layerShown() { return new Decimal(challengeCompletions('cp', 11)).gte(1) },
+    milestones: {
+        0: {
+            requirementDescription: "1 Slowdown",
+            effectDescription: "Keep Challenge 1 completions on reset",
+            done() {return player.sd.points.gte(1)},
+        },
+    }
 })
