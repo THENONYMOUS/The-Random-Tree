@@ -21,6 +21,9 @@ addLayer("cp", {
         let keptChallenges = {};
         if (hasMilestone('sd', 0)) keptChallenges[11] = challengeCompletions(this.layer, 11);
         if (hasMilestone('sd', 0)) keptChallenges[21] = challengeCompletions(this.layer, 21);
+        if (hasMilestone('sd', 1)) keptChallenges[12] = challengeCompletions(this.layer, 12);
+        if (hasMilestone('sd', 2)) keptChallenges[13] = challengeCompletions(this.layer, 13);
+        if (hasMilestone('sd', 3)) keptChallenges[14] = challengeCompletions(this.layer, 14);
 
         let keep = [];
         layerDataReset(this.layer, keep);
@@ -151,6 +154,21 @@ addLayer("sd", {
             requirementDescription: "1 Slowdown",
             effectDescription: "Keep Challenge 1 and 'Pointless' completions on reset",
             done() {return player.sd.points.gte(1)},
+        },
+        1: {
+            requerementDescription: "2 Slowdown",
+            effectDescription: "Keep Challenge 2 completions on reset",
+            done() {return player.sd.points.gte(2)},
+        },
+        2: {
+            requerementDescription: "3 Slowdown",
+            effectDescription: "Keep Challenge 3 completions on reset and unlock a Slowdown Challenge",
+            done() {return player.sd.points.gte(3)},
+        },
+        3: {
+            requerementDescription: "4 Slowdown",
+            effectDescription: "Keep Challenge 4 completions on reset",
+            done() {return player.sd.points.gte(4)},
         },
     }
 })
