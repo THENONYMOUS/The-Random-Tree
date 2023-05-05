@@ -16,9 +16,9 @@ addLayer("cp", {
     type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
     exponent: 0.5, // Prestige currency exponent
     doReset(resettingLayer) {
-        if (layers[resettingLayer].row >= layers[this.layer].row) return;
+        if (layers[resettingLayer].row <= layers[this.layer].row) return;
 
-        let kepChallenges = {};
+        let keptChallenges = {};
         if (hasMilestone('sd', 0)) keptChallenges[11] = challengeCompletions(this.layer, 11);
         if (hasMilestone('sd', 0)) keptChallenges[21] = challengeCompletions(this.layer, 21);
 
