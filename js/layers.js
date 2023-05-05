@@ -156,17 +156,17 @@ addLayer("sd", {
             done() {return player.sd.points.gte(1)},
         },
         1: {
-            requerementDescription: "2 Slowdown",
+            requirementDescription: "2 Slowdown",
             effectDescription: "Keep Challenge 2 completions on reset",
             done() {return player.sd.points.gte(2)},
         },
         2: {
-            requerementDescription: "3 Slowdown",
+            requirementDescription: "3 Slowdown",
             effectDescription: "Keep Challenge 3 completions on reset and unlock a Slowdown Challenge [wip]",
             done() {return player.sd.points.gte(3)},
         },
         3: {
-            requerementDescription: "4 Slowdown",
+            requirementDescription: "4 Slowdown",
             effectDescription: "Keep Challenge 4 completions on reset",
             done() {return player.sd.points.gte(4)},
         },
