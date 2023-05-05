@@ -17,7 +17,7 @@ addLayer("cp", {
     exponent: 0.5, // Prestige currency exponent
     doReset(resettingLayer) {
         if (layers[resettingLayer].row <= layers[this.layer].row) return;
-        if(hasMilestone('sd', 3)) var x = new Decimal(player.cp.points.times(0.1));
+        if(hasMilestone('sd', 3)) var x = new Decimal(player.cp.points.times(0.9));
 
         let keptChallenges = {};
         if (hasMilestone('sd', 0)) keptChallenges[11] = challengeCompletions(this.layer, 11);
@@ -172,7 +172,7 @@ addLayer("sd", {
         },
         3: {
             requirementDescription: "4 Slowdown",
-            effectDescription: "Keep Challenge 4 completions and 10% of challenge points on reset",
+            effectDescription: "Keep Challenge 4 completions and 90% of challenge points on reset",
             done() {return player.sd.points.gte(4)},
         },
     }
