@@ -28,12 +28,13 @@ addLayer("cp", {
 
         let keep = [];
         layerDataReset(this.layer, keep);
-
+        
+        if(!inChallenge('sd', this.id)) {
         if(hasMilestone('sd', 3)) player.cp.points=new Decimal(x);
 
         for(const [id, completions] of Object.entries(keptChallenges)) {
             player[this.layer].challenges[id] = completions;
-        }
+        }}
     },
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
@@ -51,7 +52,10 @@ addLayer("cp", {
         11: {
             name: "The First Challenge",
             challengeDescription: "No nerfs, just reach the goal",
-            completionLimit: (10),
+            completionLimit() {
+                if(hasChallenge('sd', 11)) return (100)
+                else return (10)
+            },
             rewardDescription() {return "+5 to base point gain per completion ("+format(challengeCompletions('cp', 11))+"/10)"},
             goalDescription() {return "Reach "+format (new Decimal(50).times(new Decimal(3).pow(new Decimal(challengeCompletions('cp', 11)))))+" points"},
             canComplete() {return player.points.gte(new Decimal(50).times(new Decimal(3).pow(new Decimal(challengeCompletions('cp', 11)))))},
@@ -192,5 +196,15 @@ addLayer("sd", {
             effectDescription: "Keep Challenge 4 completions and 90% of challenge points on reset",
             done() {return player.sd.points.gte(4)},
         },
-    }
+    },
+    challenges: {
+        11: {
+            name: "Slowdown",
+            challengeDescription: "'Pointless' effect",
+            unlocked() {return hasMilestone('sd', 2)},
+            rewardDescription: "Increase Completion limit of Challenge 1 to 100",
+            goalDescription: "Reach 3 Power",
+            canComplete() {return player.p.points.gte(3)},
+        },
+    },
 })

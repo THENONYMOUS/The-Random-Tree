@@ -53,6 +53,7 @@ function getPointGen() {
 	if (inChallenge('cp', 14)) gain = gain.dividedBy((challengeCompletions('cp', 14)+1)*2)
 	if (inChallenge('cp', 12)) gain = gain.dividedBy(player.points.add(1).pow(0.5))
 	if (inChallenge('cp', 21)) gain = gain.pow(0.1).dividedBy(10)
+	if (inChallenge('sd', 11)) gain = gain.pow(0.1).dividedBy(10)
 	return new Decimal(gain)
 }
 
