@@ -30,7 +30,7 @@ addLayer("cp", {
         layerDataReset(this.layer, keep);
 
         console.log("current challenge: "+format(player.sd.activeChallenge))
-        if(player.sd.activeChallenge == null) {
+        if(new Decimal(player.sd.activeChallenge) == new Decimal(0.00)) {
         if(hasMilestone('sd', 3)) player.cp.points=new Decimal(x);
 
         for(const [id, completions] of Object.entries(keptChallenges)) {
