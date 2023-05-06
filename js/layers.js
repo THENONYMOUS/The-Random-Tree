@@ -91,6 +91,23 @@ addLayer("cp", {
             canComplete() {return new Decimal(tmp.pointGen).gte(0.25)},
         },
     },
+    milestones: {
+        0: {
+            requirementDescription: "5 Total Completions",
+            effectDescription: "Unlock Challenge 3: Strict",
+            done() {return new Decimal(challengeCompletions('cp', 11)+challengeCompletions('cp', 12)).gte(5)},
+        },
+        1: {
+            requirementDescription: "100 Challenge Points",
+            effectDescription: "Unlock Challenge 4: Nerfalo",
+            done() {return player.cp.points.gte(100)},
+        },
+        2: {
+            requirementDescription: "10 Completions of Challenge 1",
+            effectDescription: "Unlock Challenge 5: Pointless",
+            done() {return new Decimal(challengeCompletions('cp', 11)).gte(10)},
+        },
+    },
 }),
 addLayer("p", {
     name: "Powers", // This is optional, only used in a few places, If absent it just uses the layer id.
