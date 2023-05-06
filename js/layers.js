@@ -29,7 +29,7 @@ addLayer("cp", {
         let keep = [];
         layerDataReset(this.layer, keep);
         
-        if(!inChallenge('sd', this.id)) {
+        if(!inChallenge('sd')) {
         if(hasMilestone('sd', 3)) player.cp.points=new Decimal(x);
 
         for(const [id, completions] of Object.entries(keptChallenges)) {
@@ -200,7 +200,7 @@ addLayer("sd", {
     challenges: {
         11: {
             name: "Slowdown",
-            challengeDescription: "'Pointless' effect",
+            challengeDescription: "'Pointless' effect but using 0.5 instead of 0.1",
             unlocked() {return hasMilestone('sd', 2)},
             rewardDescription: "Increase Completion limit of Challenge 1 to 100",
             goalDescription: "Reach 3 Power",
