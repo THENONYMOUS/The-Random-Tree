@@ -87,8 +87,8 @@ addLayer("cp", {
             challengeDescription: "Point gain ^0.1 then x0.1",
             unlocked() {return new Decimal(challengeCompletions('cp', 11)).gte(10)},
             rewardDescription: "Unlock 'Powers', an adjacent layer which multiplies point gain by 2^Power",
-            goalDescription: "Reach 0.25 Points/sec",
-            canComplete() {return new Decimal(tmp.pointGen).gte(0.25)},
+            goalDescription: "Reach 0.30 Points/sec",
+            canComplete() {return new Decimal(tmp.pointGen).gte(0.295)},
         },
     },
     milestones: {
