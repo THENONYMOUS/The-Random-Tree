@@ -30,8 +30,19 @@ addLayer("s", {
         11: {
             description: "Generate snow, increases based on Sofia Tokens",
             cost: (new Decimal(1)),
-            effect() {return player.s.points.add(1).pow(0.5)},
+            effect() {
+                if(hasUpgrade('s', 12)){
+                return player.s.points.add(1).pow(0.5).times(upgradeEffect('s', 11))}
+            else {
+                return player.s.points.add(1).pow(0.5)
+            }},
             effectDisplay() {return "+"+format(upgradeEffect('s', 11))},
         },
+        12: {
+            description: "Multiply upgrade 1 effect based on points",
+            cost: (new Decimal(5)),
+            effect() {return player.points.add(1).pow(0.3)},
+            effectDisplay() {return "x"+format(upgradeEffect('s', 11))},
+        }
     }
 })
