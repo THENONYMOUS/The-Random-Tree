@@ -57,5 +57,20 @@ addLayer("s", {
             effect() {return player.s.points.add(1).pow(0.25)},
             effectDisplay() {return "x"+format(upgradeEffect('s', 14))},
         },
+        21: {
+            description: "Generate more snow, affected by boosts to upgrade 1",
+            cost: (new Decimal(100)),
+            unlocked() {return hasMilestone('s', 0)},
+            effect() {return upgradeEffect('s', 11).times(0.5)},
+            effectDisplay() {return "+"+format(upgradeEffect('s', 21))},
+        },
+    },
+    milestones: {
+        0: {
+            requirementDescription: "5,000 Points",
+            effectDescription: "Unlock row 2 Sofia Token upgrades",
+            unlocked() {return hasUpgrade('s', 14)},
+            done() {return player.points.gte(5000) && hasUpgrade('s', 14)},
+        },
     }
 })
