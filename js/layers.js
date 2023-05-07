@@ -42,7 +42,7 @@ addLayer("s", {
         12: {
             description: "Multiply upgrade 1 effect based on points",
             cost: (new Decimal(5)),
-            effect() {return player.points.add(1).times(10).pow(0.2)},
+            effect() {return player.points.add(1).times(2).pow(0.2)},
             effectDisplay() {return "x"+format(upgradeEffect('s', 12))},
         },
         13: {
