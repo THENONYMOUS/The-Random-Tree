@@ -129,10 +129,10 @@ addLayer("s", {
             done() {return player.points.gte(2000)&&hasUpgrade('s', 14)&&!inChallenge('f', 11)},
         },
         1: {
-            requirementDescription: "50,000 Snow",
+            requirementDescription: "20,000 Snow",
             effectDescription: "Unlock a new layer (Step 2/2)",
             unlocked() {return hasUpgrade('s', 24)},
-            done() {return player.points.gte(50000)&&hasUpgrade('s', 24)},
+            done() {return player.points.gte(20000)&&hasUpgrade('s', 24)},
         },
     },
 }),
