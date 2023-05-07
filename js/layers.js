@@ -16,6 +16,7 @@ addLayer("s", {
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
         if(hasUpgrade('s', 14)) mult=mult.times(upgradeEffect('s', 14))
+        if(hasUpgrade('s', 23)) mult=mult.times(upgradeEffect('s', 23))
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
@@ -40,13 +41,13 @@ addLayer("s", {
             effectDisplay() {return "+"+format(upgradeEffect('s', 11))},
         },
         12: {
-            description: "Multiply upgrade 1 effect based on points",
+            description: "Multiply upgrade 1 effect based on snow",
             cost: (new Decimal(5)),
             effect() {return player.points.add(1).times(2).pow(0.2)},
             effectDisplay() {return "x"+format(upgradeEffect('s', 12))},
         },
         13: {
-            description: "Multiply point gain by 2",
+            description: "Multiply snow gain by 2",
             cost: (new Decimal(10)),
             effect() {return 2},
             effectDisplay() {return "x2"},
@@ -71,8 +72,15 @@ addLayer("s", {
             description: "Multiply Upgrade 2-1 (row 2 Column 1) based on Sofia Tokens",
             cost: (new Decimal(1000)),
             unlocked() {return hasMilestone('s', 0)},
-            effect() {return player.s.points.add(1).pow(0.1)},
+            effect() {return player.s.points.add(1).pow(0.2)},
             effectDisplay() {return "x"+format(upgradeEffect('s', 22))},
+        },
+        23: {
+            description: "Multiply Sofia Token gain based on Snow",
+            cost: (new Decimal(1500)),
+            unlocked() {return hasMilestone('s', 0)},
+            effect() {return player.points.pow(0.1)},
+            effectDisplay() {return "x"+format(upgradeEffect('s', 23))},
         },
     },
     milestones: {
