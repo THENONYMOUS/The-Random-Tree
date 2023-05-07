@@ -119,7 +119,7 @@ addLayer("f", {
     type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
     exponent: 0.5, // Prestige currency exponent
     effect() {return player.f.points.add(1).pow(0.5)},
-    effectDescription() {return "Multiplies point gain by x"+format(layerEffect('f'))},
+    effectDescription() {return "Multiplies point gain by x"+format(player.f.points.add(1).pow(0.5))},
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
         return mult
