@@ -62,9 +62,9 @@ addLayer("s", {
             cost: (new Decimal(100)),
             unlocked() {return hasMilestone('s', 0)},
             effect() {if(hasUpgrade('s', 22)) {
-                    return upgradeEffect('s', 11).times(0.25).times(upgradeEffect('s', 22))}
+                    return upgradeEffect('s', 11).times(0.5).times(upgradeEffect('s', 22))}
                 else {
-                    return upgradeEffect('s', 11).times(0.25)}},
+                    return upgradeEffect('s', 11).times(0.5)}},
             effectDisplay() {return "+"+format(upgradeEffect('s', 21))},
         },
         22: {
