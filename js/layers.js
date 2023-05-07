@@ -30,6 +30,8 @@ addLayer("s", {
         11: {
             description: "Generate snow, increases based on Sofia Tokens",
             cost: (new Decimal(1)),
+            effect() {return player.s.points.add(1).pow(0.5)},
+            effectDisplay() {return "+"+format(upgradeEffect('s', 11))},
         },
     }
 })
