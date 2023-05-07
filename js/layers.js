@@ -85,7 +85,7 @@ addLayer("s", {
     },
     milestones: {
         0: {
-            requirementDescription: "5,000 Points",
+            requirementDescription: "5,000 Snow",
             effectDescription: "Unlock row 2 Sofia Token upgrades",
             unlocked() {return hasUpgrade('s', 14)},
             done() {return player.points.gte(5000) && hasUpgrade('s', 14)},
