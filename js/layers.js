@@ -32,7 +32,7 @@ addLayer("s", {
             cost: (new Decimal(1)),
             effect() {
                 if(hasUpgrade('s', 12)){
-                return player.s.points.add(1).pow(0.5).times(upgradeEffect('s', 11))}
+                return player.s.points.add(1).pow(0.5).times(upgradeEffect('s', 12))}
             else {
                 return player.s.points.add(1).pow(0.5)
             }},
