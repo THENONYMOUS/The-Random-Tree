@@ -127,7 +127,7 @@ addLayer("f", {
     gainExp() { // Calculate the exponent on main currency from bonuses
         return new Decimal(1)
     },
-    row: 0, // Row the layer is in on the tree (0 is the first row)
+    row: 1, // Row the layer is in on the tree (0 is the first row)
     hotkeys: [
         {key: "f", description: "F: Reset to gain Meat Boxes", onPress(){if (canReset(this.layer)) doReset(this.layer)}, unlocked() {return hasMilestone('s', 1)||player.f.best.gte(1)}},
     ],
