@@ -195,7 +195,7 @@ addLayer("f", {
     buyables: {
         11: {
             cost(x) {return new Decimal(2).pow(x)},
-            display() {return "Multiply Sofia Token gain by Amount+1. Cost: "+format(new Decimal(2).pow(getBuyableAmount(this.layer, this.id).add(1)))+". Amount: "+format(getBuyableAmount(this.layer, this.id))},
+            display() {return "Multiply Sofia Token gain by Amount+1. Cost: "+format(new Decimal(2).pow(getBuyableAmount(this.layer, this.id)))+". Amount: "+format(getBuyableAmount(this.layer, this.id))},
             canAfford() {return player[this.layer].points.gte(this.cost())},
             buy() {
                 player[this.layer].points = player[this.layer].points.sub(this.cost())
