@@ -91,7 +91,7 @@ addLayer("s", {
         },
         31: {
             title: "Gift:",
-            description: "Multiply point gain by 2",
+            description: "Multiply snow gain by 2",
             cost: (new Decimal(0)),
             unlocked() {return hasMilestone('f', 0)},
         },
@@ -177,7 +177,8 @@ addLayer("f", {
             name: "Stuck",
             challengeDescription: "You can't buy row 2 upgrades",
             goalDescription: "Buy the Challenge Unlock again",
-            unlocked() {return hasUpgrade('s', 34)},
+            rewardDescription() {return "Multiply point gain by Food. Currently: "+format(player.f.points.add(1).pow(0.75))},
+            unlocked() {return hasUpgrade('s', 34)||hasChallenge('f', 11)||inChallenge('f', 11)},
             canComplete() {return hasUpgrade('s', 34)},
         },
     },
