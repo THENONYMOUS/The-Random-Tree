@@ -131,7 +131,7 @@ addLayer("f", {
     hotkeys: [
         {key: "f", description: "F: Reset to gain Meat Boxes", onPress(){if (canReset(this.layer)) doReset(this.layer)}, unlocked() {return hasMilestone('s', 1)||player.f.best.gte(1)}},
     ],
-    layerShown(){return hasMilestone('s', 1)||player.f.best.gte(1)},
+    layerShown(){return hasMilestone('s', 1)||hasMilestone('f', 0).gte(1)},
 
     milestones: {
         0: {
