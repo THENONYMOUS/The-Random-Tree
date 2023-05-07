@@ -79,7 +79,7 @@ addLayer("s", {
             description: "Multiply Sofia Token gain based on Snow",
             cost: (new Decimal(1500)),
             unlocked() {return hasMilestone('s', 0)},
-            effect() {return player.points.pow(0.1)},
+            effect() {return player.points.add(1).pow(0.1)},
             effectDisplay() {return "x"+format(upgradeEffect('s', 23))},
         },
     },
