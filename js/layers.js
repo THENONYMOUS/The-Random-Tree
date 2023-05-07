@@ -43,6 +43,12 @@ addLayer("s", {
             cost: (new Decimal(5)),
             effect() {return player.points.add(1).pow(0.3)},
             effectDisplay() {return "x"+format(upgradeEffect('s', 12))},
-        }
+        },
+        13: {
+            description: "Multiply point gain by 2",
+            cost: (new Decimal(10)),
+            effect() {return 2},
+            effectDisplay() {return "x2"},
+        },
     }
 })
