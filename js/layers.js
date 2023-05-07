@@ -16,11 +16,14 @@ addLayer("s", {
     autoUpgrade() {return hasMilestone('f', 1)},
     passiveGeneration() {if(hasMilestone('f', 2)){return 0.25}
                     else{return 0}},
+    softcap: (new Decimal(1000)),
+    softcapPower: (new Decimal(0.5)),
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
         if(hasUpgrade('s', 14)) mult=mult.times(upgradeEffect('s', 14))
         if(hasUpgrade('s', 23)) mult=mult.times(upgradeEffect('s', 23))
         if(hasUpgrade('s', 32)) mult=mult.times(upgradeEffect('s', 32))
+        mult=mult.times(getBuyableAmount('f', 11).add(1))
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
@@ -184,9 +187,21 @@ addLayer("f", {
             name: "Stuck",
             challengeDescription: "You can't buy row 2 upgrades",
             goalDescription: "Buy the Challenge Unlock again",
-            rewardDescription() {return "Multiply point gain by Food. Currently: "+format(player.f.points.add(1).pow(0.75))},
+            rewardDescription() {return "Multiply point gain by Food and unlocks a buyable. Currently: "+format(player.f.points.add(1).pow(0.25))},
             unlocked() {return hasUpgrade('s', 34)||hasChallenge('f', 11)||inChallenge('f', 11)},
             canComplete() {return hasUpgrade('s', 34)},
         },
     },
+    buyables: {
+        11: {
+            cost(x) {return new Decimal(2).pow(x)},
+            display() {return "Multiply Sofia Token gain by Amount+1. Cost: "+format(new Decimal(2).pow(getBuyableAmount(this.layer, this.id).add(1)))+". Amount: "+format(getBuyableAmount(this.layer, this.id))},
+            canAfford() {return player[this.layer].points.gte(this.cost())},
+            buy() {
+                player[this.layer].points = player[this.layer].points.sub(this.cost())
+                addBuyables(this.layer, this.id, 1)
+            },
+            unlocked() {return hasChallenge('f', 11)},
+        },
+    }
 })
