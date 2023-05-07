@@ -13,6 +13,7 @@ addLayer("s", {
     baseAmount() {return player.points}, // Get the current amount of baseResource
     type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
     exponent: 0.5, // Prestige currency exponent
+    autoUpgrade() {return hasMilestone('f', 1)},
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
         if(hasUpgrade('s', 14)) mult=mult.times(upgradeEffect('s', 14))
@@ -108,13 +109,18 @@ addLayer("s", {
             effect() {if(hasUpgrade('s', 33)) {return 1.1}
         else {return 1}},
         },
+        34: {
+            description: "Unlock a challenge (in food layer)",
+            cost: (new Decimal(5000)),
+            unlocked() {return hasMilestone('f', 0)},
+        },
     },
     milestones: {
         0: {
             requirementDescription: "5,000 Snow",
             effectDescription: "Unlock row 2 Sofia Token upgrades",
             unlocked() {return hasUpgrade('s', 14)},
-            done() {return player.points.gte(5000)&&hasUpgrade('s', 14)},
+            done() {return player.points.gte(5000)&&hasUpgrade('s', 14)&&!inChallenge('f', 11)},
         },
         1: {
             requirementDescription: "50,000 Snow",
@@ -122,7 +128,7 @@ addLayer("s", {
             unlocked() {return hasUpgrade('s', 24)},
             done() {return player.points.gte(50000)&&hasUpgrade('s', 24)},
         },
-    }
+    },
 }),
 addLayer("f", {
     name: "Food", // This is optional, only used in a few places, If absent it just uses the layer id.
@@ -160,5 +166,19 @@ addLayer("f", {
             effectDescription: "Unlock a new row of Sofia Token upgrades",
             done() {return player.f.points.gte(1)},
         },
-    }
+        1: {
+            requirementDescription: "3 Meat Boxes",
+            effectDescription: "Auto-buy Sofia Token upgrades",
+            done() {return player.f.points.gte(3)},
+        },
+    },
+    challenges: {
+        11: {
+            name: "Stuck",
+            challengeDescription: "You can't buy row 2 upgrades",
+            goalDescription: "Buy the Challenge Unlock again",
+            unlocked() {return hasUpgrade('s', 34)},
+            canComplete() {return hasUpgrade('s', 34)},
+        },
+    },
 })
