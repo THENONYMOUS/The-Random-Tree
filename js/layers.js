@@ -42,7 +42,7 @@ addLayer("s", {
         12: {
             description: "Multiply upgrade 1 effect based on points",
             cost: (new Decimal(5)),
-            effect() {return player.points.add(1).pow(0.3)},
+            effect() {return player.points.add(1).times(10).pow(0.2)},
             effectDisplay() {return "x"+format(upgradeEffect('s', 12))},
         },
         13: {
@@ -61,8 +61,18 @@ addLayer("s", {
             description: "Generate more snow, affected by boosts to upgrade 1",
             cost: (new Decimal(100)),
             unlocked() {return hasMilestone('s', 0)},
-            effect() {return upgradeEffect('s', 11).times(0.5)},
+            effect() {if(hasUpgrade('s', 22)) {
+                    return upgradeEffect('s', 11).times(0.25).times(upgradeEffect('s', 22))}
+                else {
+                    return upgradeEffect('s', 11).times(0.25)}},
             effectDisplay() {return "+"+format(upgradeEffect('s', 21))},
+        },
+        22: {
+            description: "Multiply Upgrade 2-1 (row 2 Column 1) based on Sofia Tokens",
+            cost: (new Decimal(1000)),
+            unlocked() {return hasMilestone('s', 0)},
+            effect() {return player.s.points.add(1).pow(0.1)},
+            effectDisplay() {return "x"+format(upgradeEffect('s', 22))},
         },
     },
     milestones: {
