@@ -24,7 +24,7 @@ addLayer("s", {
         if(hasUpgrade('s', 23)) mult=mult.times(upgradeEffect('s', 23))
         if(hasUpgrade('s', 32)) mult=mult.times(upgradeEffect('s', 32))
         mult=mult.times(getBuyableAmount('f', 11).add(1))
-        mult=mult.time(player.w.points.add(1).pow(0.5))
+        mult=mult.times(player.w.points.add(1).pow(0.5))
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
