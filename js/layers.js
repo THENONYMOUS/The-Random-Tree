@@ -24,6 +24,7 @@ addLayer("s", {
         if(hasUpgrade('s', 23)) mult=mult.times(upgradeEffect('s', 23))
         if(hasUpgrade('s', 32)) mult=mult.times(upgradeEffect('s', 32))
         mult=mult.times(getBuyableAmount('f', 11).add(1))
+        mult=mult.time(player.w.points.add(1).pow(0.5))
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
@@ -151,7 +152,7 @@ addLayer("f", {
     type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
     exponent: 0.5, // Prestige currency exponent
     effect() {return player.f.points.add(1).pow(0.5)},
-    effectDescription() {return "Multiplies point gain by x"+format(player.f.points.add(1).pow(0.5))},
+    effectDescription() {return "Multiplies snow gain by x"+format(player.f.points.add(1).pow(0.5))},
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
         return mult
@@ -181,6 +182,12 @@ addLayer("f", {
             effectDescription: "Gain 25% of Sofia Tokens gained every second",
             done() {return player.f.points.gte(10)},
         },
+        3: {
+            requirementDescription: "5 Buyable Purchases",
+            effectDescription: "Unlock a new layer",
+            unlocked() {return hasChallenge('f', 11)},
+            done() {return getBuyableAmount('f', 11).gte(5)},
+        },
     },
     challenges: {
         11: {
@@ -203,5 +210,43 @@ addLayer("f", {
             },
             unlocked() {return hasChallenge('f', 11)},
         },
+    }
+}),
+addLayer("w", {
+    name: "Walks", // This is optional, only used in a few places, If absent it just uses the layer id.
+    symbol: "W", // This appears on the layer's node. Default is the id with the first letter capitalized
+    position: 1, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
+    startData() { return {
+        unlocked: true,
+		points: new Decimal(0),
+    }},
+    color: "#5050FF",
+    requires: new Decimal(3000), // Can be a function that takes requirement increases into account
+    resource: "Walks", // Name of prestige currency
+    baseResource: "Snow", // Name of resource prestige is based on
+    baseAmount() {return player.points}, // Get the current amount of baseResource
+    type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
+    exponent: 0.25, // Prestige currency exponent
+    effect() {return player.w.points.add(1).pow(0.5)},
+    effectDescription() {return "Multiplies Sofia Token gain by x"+format(player.w.points.add(1).pow(0.5))},
+    gainMult() { // Calculate the multiplier for main currency from bonuses
+        mult = new Decimal(1)
+        return mult
+    },
+    gainExp() { // Calculate the exponent on main currency from bonuses
+        return new Decimal(1)
+    },
+    row: 1, // Row the layer is in on the tree (0 is the first row)
+    hotkeys: [
+        {key: "w", description: "W: Reset to gain Walks", onPress(){if (canReset(this.layer)) doReset(this.layer)}, unlocked() {return hasMilestone('f', 3)||player.w.best.gte(1)}},
+    ],
+    layerShown(){return hasMilestone('f', 3)||hasMilestone('w', 0)},
+
+    milestones: {
+        0: {
+            requirementDescription: "1 Walk",
+            effectDescription: "Keep Walks Unlocked",
+            done() {return player.w.points.gte(1)}
+        }
     }
 })
