@@ -17,6 +17,7 @@ addLayer("s", {
         mult = new Decimal(1)
         if(hasUpgrade('s', 14)) mult=mult.times(upgradeEffect('s', 14))
         if(hasUpgrade('s', 23)) mult=mult.times(upgradeEffect('s', 23))
+        if(hasUpgrade('s', 32)) mult=mult.times(upgradeEffect('s', 32))
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
@@ -43,7 +44,7 @@ addLayer("s", {
         12: {
             description: "Multiply upgrade 1 effect based on snow",
             cost: (new Decimal(5)),
-            effect() {return player.points.add(1).times(2).pow(0.2)},
+            effect() {return player.points.add(1).times(2).pow(0.2).pow(upgradeEffect('s', 33))},
             effectDisplay() {return "x"+format(upgradeEffect('s', 12))},
         },
         13: {
@@ -86,6 +87,26 @@ addLayer("s", {
             description: "Unlock a new layer (Step 1/2)",
             cost: (new Decimal(2500)),
             unlocked() {return hasMilestone('s', 0)},
+        },
+        31: {
+            title: "Gift:",
+            description: "Multiply point gain by 2",
+            cost: (new Decimal(0)),
+            unlocked() {return hasMilestone('f', 0)},
+        },
+        32: {
+            description: "Food effect applies to Sofia Tokens",
+            cost: (new Decimal(30)),
+            unlocked() {return hasMilestone('f', 0)},
+            effect() {return player.f.points.add(1).pow(0.5)},
+            effectDisplay() {return "x"+format(upgradeEffect('s', 32))},
+        },
+        33: {
+            description: "Boost Upgrade 1-2 Effect ^1.1",
+            cost: (new Decimal(3000)),
+            unlocked() {return hasMilestone('f', 0)},
+            effect() {if(hasUpgrade('s', 33)) {return 1.1}
+        else {return 1}},
         },
     },
     milestones: {
