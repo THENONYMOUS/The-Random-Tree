@@ -6,7 +6,7 @@ addLayer("s", {
         unlocked: true,
 		points: new Decimal(0),
     }},
-    color: "#4BDC13",
+    color: "#B0B0FF",
     requires: new Decimal(10), // Can be a function that takes requirement increases into account
     resource: "Sofia Tokens", // Name of prestige currency
     baseResource: "snow", // Name of resource prestige is based on
@@ -82,13 +82,62 @@ addLayer("s", {
             effect() {return player.points.add(1).pow(0.1)},
             effectDisplay() {return "x"+format(upgradeEffect('s', 23))},
         },
+        24: {
+            description: "Unlock a new layer (Step 1/2)",
+            cost: (new Decimal(2500)),
+            unlocked() {return hasMilestone('s', 0)},
+        },
     },
     milestones: {
         0: {
             requirementDescription: "5,000 Snow",
             effectDescription: "Unlock row 2 Sofia Token upgrades",
             unlocked() {return hasUpgrade('s', 14)},
-            done() {return player.points.gte(5000) && hasUpgrade('s', 14)},
+            done() {return player.points.gte(5000)},
+        },
+        1: {
+            requirementDescription: "50,000 Snow",
+            effectDescription: "Unlock a new layer (Step 2/2)",
+            unlocked() {return hasUpgrade('s', 24)},
+            done() {return player.points.gte(5000)},
+        },
+    }
+}),
+addLayer("f", {
+    name: "Food", // This is optional, only used in a few places, If absent it just uses the layer id.
+    symbol: "F", // This appears on the layer's node. Default is the id with the first letter capitalized
+    position: 0, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
+    startData() { return {
+        unlocked: true,
+		points: new Decimal(0),
+    }},
+    color: "#DD0000",
+    requires: new Decimal(3000), // Can be a function that takes requirement increases into account
+    resource: "Meat Boxes", // Name of prestige currency
+    baseResource: "Sofia Tokens", // Name of resource prestige is based on
+    baseAmount() {return player.s.points}, // Get the current amount of baseResource
+    type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
+    exponent: 0.5, // Prestige currency exponent
+    effect() {return player.f.points.add(1).pow(0.5)},
+    effectDescription() {return "Multiplies point gain by x"+format(layerEffect('f'))},
+    gainMult() { // Calculate the multiplier for main currency from bonuses
+        mult = new Decimal(1)
+        return mult
+    },
+    gainExp() { // Calculate the exponent on main currency from bonuses
+        return new Decimal(1)
+    },
+    row: 0, // Row the layer is in on the tree (0 is the first row)
+    hotkeys: [
+        {key: "f", description: "F: Reset to gain Meat Boxes", onPress(){if (canReset(this.layer)) doReset(this.layer)}, unlocked() {return hasMilestone('s', 1)||player.f.best.gte(1)}},
+    ],
+    layerShown(){return hasMilestone('s', 1)||player.f.best.gte(1)},
+
+    milestones: {
+        0: {
+            requirementDescription: "1 Meat Box",
+            effectDescription: "Unlock a new row of Sofia Token upgrades",
+            done() {return player.f.points.gte(1)},
         },
     }
 })
