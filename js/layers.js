@@ -15,7 +15,7 @@ addLayer("s", {
     exponent: 0.5, // Prestige currency exponent
     autoUpgrade() {return hasMilestone('f', 1)},
     passiveGeneration() {if(hasMilestone('f', 2)){return 0.25}
-                    else{return 0}}
+                    else{return 0}},
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
         if(hasUpgrade('s', 14)) mult=mult.times(upgradeEffect('s', 14))
