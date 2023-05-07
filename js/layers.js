@@ -124,7 +124,7 @@ addLayer("s", {
         0: {
             requirementDescription: "5,000 Snow",
             effectDescription: "Unlock row 2 Sofia Token upgrades",
-            unlocked() {return hasUpgrade('s', 14)},
+            unlocked() {return hasUpgrade('s', 14)&&!inChallenge('f', 11)},
             done() {return player.points.gte(5000)&&hasUpgrade('s', 14)&&!inChallenge('f', 11)},
         },
         1: {
