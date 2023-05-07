@@ -1,8 +1,8 @@
 let modInfo = {
-	name: "The ??? Tree",
-	id: "mymod",
-	author: "nobody",
-	pointsName: "points",
+	name: "The Sofia Tree",
+	id: "Thenonymous-TheSofiaTree-839525",
+	author: "thenonymous",
+	pointsName: "snow",
 	modFiles: ["layers.js", "tree.js"],
 
 	discordName: "",
@@ -42,7 +42,8 @@ function getPointGen() {
 	if(!canGenPoints())
 		return new Decimal(0)
 
-	let gain = new Decimal(1)
+	let gain = new Decimal(0)
+	if(hasUpgrade('s', 11)) gain=gain.add(1)
 	return gain
 }
 
