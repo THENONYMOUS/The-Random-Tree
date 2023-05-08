@@ -70,7 +70,7 @@ addLayer("p", {
             description: "Expansion effect affects Prestige points at a reduced rate",
             cost: (new Decimal(1000)),
             unlocked() {return hasUpgrade('p', 21)},
-            effect() {return (tmp.e.effect).pow(0.3)},
+            effect() {return new Decimal(tmp.e.effect).pow(0.3)},
             effectDisplay() {return "x"+format(upgradeEffect('p', 22))},
             tooltip: "Effect ^0.3",
         },
