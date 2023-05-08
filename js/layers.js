@@ -70,9 +70,23 @@ addLayer("p", {
             description: "Expansion effect affects Prestige points at a reduced rate",
             cost: (new Decimal(1000)),
             unlocked() {return hasUpgrade('p', 21)},
-            effect() {return new Decimal(tmp.e.effect).pow(0.3)},
+            effect() {return new Decimal(tmp.e.effect).pow(0.2)},
             effectDisplay() {return "x"+format(upgradeEffect('p', 22))},
             tooltip: "Effect ^0.3",
+        },
+        23: {
+            description: "Unlock a challenge",
+            cost: (new Decimal(1e9)),
+            unlocked() {return hasUpgrade('p', 22)},
+        },
+    },
+    challenges: {
+        11: {
+            name: "Too Fast!!",
+            challengeDescription: "Expansion effect is ^0.1",
+            goalDescription: "placeholder: reach 1e10 points",
+            rewardDescription: "Unlock upgrade 2-4 and point gain increased by 50%",
+            canComplete() {return player.points.gte(new Decimal(1e10))},
         },
     },
 }),
@@ -92,11 +106,11 @@ addLayer("e", {
     baseResource: "points", // Name of resource prestige is based on
     baseAmount() {return player.points}, // Get the current amount of baseResource
     type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
-    base: new Decimal(5),
+    base() {return new Decimal(5).add(player.e.points.add(1).log(5))},
     exponent: 1, // Prestige currency exponent
     canBuyMax() {return hasUpgrade('e', 14)},
-    effect() {if(hasUpgrade('e', 12)) {
-        return new Decimal(2).pow(player.e.points.add(1))
+    effect() {if(hasUpgrade('e', 12)) {if(inChallenge('p', 11)) {return new Decimal(2).pow(player.e.points.add(1)).pow(0.1)}
+        else {return new Decimal(2).pow(player.e.points.add(1))}
     } else {
         return 1
     }},
