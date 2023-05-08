@@ -61,7 +61,7 @@ addLayer("p", {
             description: "Points multiply prestige point gain",
             cost: (new Decimal(100)),
             unlocked() {return hasUpgrade('e', 14)},
-            effect() {return player.p.points.add(1).pow(0.1)},
+            effect() {return player.points.add(1).pow(0.1)},
             effectDisplay() {return "x"+format(upgradeEffect('p', 21))},
             tooltip: "(Points + 1)^0.1",
         },
