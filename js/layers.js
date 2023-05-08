@@ -18,6 +18,7 @@ addLayer("p", {
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(2)
         if(hasUpgrade('e', 11)) mult=mult.times(upgradeEffect('e', 11))
+        if(hasUpgrade('p', 21)) mult=mult.times(upgradeEffect('p', 21))
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
@@ -49,11 +50,20 @@ addLayer("p", {
             unlocked() {return hasUpgrade('p', 12)},
             effect() {return player.p.points.add(1).pow(0.5)},
             effectDisplay() {return "x"+format(upgradeEffect('p', 13))},
+            tooltip: "(Prestige points + 1)^0.5",
         },
         14: {
             description: "Unlock a new layer and point gain increased by 50%",
             cost: (new Decimal(20)),
             unlocked() {return hasUpgrade('p', 13)},
+        },
+        21: {
+            description: "Points multiply prestige point gain",
+            cost: (new Decimal(100)),
+            unlocked() {return hasUpgrade('e', 14)},
+            effect() {return player.p.points.add(1).pow(0.1)},
+            effectDisplay() {return "x"+format(upgradeEffect('p', 21))},
+            tooltip: "(Points + 1)^0.1",
         },
     },
 }),
@@ -75,6 +85,7 @@ addLayer("e", {
     type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
     base: new Decimal(5),
     exponent: 1, // Prestige currency exponent
+    canBuyMax() {return hasUpgrade('e', 14)},
     effect() {if(hasUpgrade('e', 12)) {
         return new Decimal(2).pow(player.e.points.add(1))
     } else {
@@ -104,6 +115,7 @@ addLayer("e", {
             description: "Unlock Expansion effect",
             cost: (new Decimal(1)),
             unlocked() {return hasUpgrade('e', 11)},
+            tooltip: "2^(Expansion points + 1)",
         },
         13: {
             description: "Points boost their own gain",
@@ -111,6 +123,12 @@ addLayer("e", {
             unlocked() {return hasUpgrade('e', 12)},
             effect() {return player.points.add(1).pow(0.3)},
             effectDisplay() {return "x"+format(upgradeEffect('e', 13))},
+            tooltip: "(Points + 1)^0.3",
+        },
+        14: {
+            description: "You can buy max Expansion points and unlock a new row of prestige upgrades",
+            cost: (new Decimal(5)),
+            unlocked() {return hasUpgrade('e', 13)},
         },
     },
 })
