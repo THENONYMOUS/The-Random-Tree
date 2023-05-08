@@ -73,8 +73,14 @@ addLayer("e", {
     baseResource: "points", // Name of resource prestige is based on
     baseAmount() {return player.points}, // Get the current amount of baseResource
     type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
-    base: new Decimal(2),
+    base: new Decimal(5),
     exponent: 1, // Prestige currency exponent
+    effect() {if(hasUpgrade('e', 12)) {
+        return new Decimal(2).pow(player.e.points.add(1))
+    } else {
+        return 1
+    }},
+    effectDescription() {return "Expansions are multiplying point gain by x"+format(tmp[layer].effect)},
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
         return mult
@@ -93,6 +99,11 @@ addLayer("e", {
             cost: (new Decimal(1)),
             effect() {return 1.5},
             effectDisplay() {return "x"+format(upgradeEffect('e', 11))},
+        },
+        12: {
+            description: "Unlock Expansion effect",
+            cost: (new Decimal(1)),
+            unlocked() {return hasUpgrade('e', 11)},
         },
     },
 })
