@@ -109,7 +109,7 @@ addLayer("e", {
             description: "Points boost their own gain",
             cost: (new Decimal(3)),
             unlocked() {return hasUpgrade('e', 12)},
-            effect() {return player.points.pow(0.3)},
+            effect() {return player.points.add(1).pow(0.3)},
             effectDisplay() {return "x"+format(upgradeEffect('e', 13))},
         },
     },
