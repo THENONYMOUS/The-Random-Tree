@@ -28,9 +28,17 @@ addLayer("p", {
     upgrades: {
         11: {
             description: "Generate 2 Points every second",
-            cost: (new Decimal(2)),
+            cost: (new Decimal(1)),
             effect() {return new Decimal(2)},
             effectDisplay() {return "+"+format(upgradeEffect('p', 11))},
+        },
+        12: {
+            description: "Previous upgrade is multiplied by 2",
+            cost: (new Decimal(3)),
+            unlocked() {return hasUpgrade('p', 11)},
+            effect() {if(hasUpgrade('p', 12)) {return 2}
+            else{return 1}},
+            effectDisplay() {return "x"+format(upgradeEffect('p', 12))},
         },
     },
 })
