@@ -32,9 +32,9 @@ addLayer("p", {
     layerShown(){return true},
     upgrades: {
         11: {
-            description: "Generate 2 Points every second",
+            description: "Generate 1 Point every second",
             cost: (new Decimal(1)),
-            effect() {return new Decimal(2).times(upgradeEffect('p', 12))},
+            effect() {return new Decimal(1).times(upgradeEffect('p', 12))},
             effectDisplay() {return "+"+format(upgradeEffect('p', 11))},
         },
         12: {
