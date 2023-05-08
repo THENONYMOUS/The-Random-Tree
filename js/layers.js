@@ -178,7 +178,7 @@ addLayer("d", {
     baseResource: "Prestige Points", // Name of resource prestige is based on
     baseAmount() {return player.p.points}, // Get the current amount of baseResource
     type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
-    base() {return new Decimal(5).add(player.d.points.add(onPrestige(gain)).add(1).log(5))},
+    base() {return new Decimal(5).add(player.d.points.add(getResetGain(this.layer)).add(1).log(5))},
     exponent: 1, // Prestige currency exponent
         gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
