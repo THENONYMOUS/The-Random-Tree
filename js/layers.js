@@ -204,8 +204,8 @@ addLayer("sd", {
             challengeDescription: "'Pointless' effect but using 0.5 instead of 0.1",
             unlocked() {return hasMilestone('sd', 2)},
             rewardDescription: "Increase Completion limit of Challenge 1 to 100",
-            goalDescription: "Reach 3 Power",
-            canComplete() {return player.p.points.gte(3)},
+            goalDescription: "Reach 2 Power",
+            canComplete() {return player.p.points.gte(2)},
         },
     },
 })
