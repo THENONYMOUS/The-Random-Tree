@@ -6,7 +6,7 @@ addLayer("p", {
         unlocked: true,
 		points: new Decimal(0),
     }},
-    color: "#4BDC13",
+    color: "#7A7AFF",
     requires: new Decimal(10), // Can be a function that takes requirement increases into account
     resource: "prestige points", // Name of prestige currency
     baseResource: "points", // Name of resource prestige is based on
@@ -14,7 +14,7 @@ addLayer("p", {
     type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
     exponent: 0.5, // Prestige currency exponent
     gainMult() { // Calculate the multiplier for main currency from bonuses
-        mult = new Decimal(1)
+        mult = new Decimal(2)
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
@@ -24,5 +24,13 @@ addLayer("p", {
     hotkeys: [
         {key: "p", description: "P: Reset for prestige points", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
-    layerShown(){return true}
+    layerShown(){return true},
+    upgrades: {
+        11: {
+            description: "Generate 2 Points every second",
+            cost: (new Decimal(2)),
+            effect() {return new Decimal(2)},
+            effectDisplay() {return "+"+format(upgradeEffect('p', 11))},
+        },
+    },
 })
