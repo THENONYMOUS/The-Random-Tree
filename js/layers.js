@@ -80,7 +80,7 @@ addLayer("e", {
     } else {
         return 1
     }},
-    effectDescription() {return "Expansions are multiplying point gain by x"+format(tmp[layer].effect)},
+    effectDescription() {return "Expansions are multiplying point gain by x"+format(tmp.e.effect)},
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
         return mult
@@ -104,6 +104,13 @@ addLayer("e", {
             description: "Unlock Expansion effect",
             cost: (new Decimal(1)),
             unlocked() {return hasUpgrade('e', 11)},
+        },
+        13: {
+            description: "Points boost their own gain",
+            cost: (new Decimal(3)),
+            unlocked() {return hasUpgrade('e', 12)},
+            effect() {return player.points.pow(0.3)},
+            effectDisplay() {return "x"+format(upgradeEffect('e', 13))},
         },
     },
 })
