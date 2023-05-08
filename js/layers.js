@@ -34,7 +34,7 @@ addLayer("p", {
         11: {
             description: "Generate 2 Points every second",
             cost: (new Decimal(1)),
-            effect() {return new Decimal(2)},
+            effect() {return new Decimal(2).times(upgradeEffect('p', 12))},
             effectDisplay() {return "+"+format(upgradeEffect('p', 11))},
         },
         12: {
@@ -82,7 +82,7 @@ addLayer("p", {
     },
     challenges: {
         11: {
-            name: "Too Fast!!",
+            name: "Too Fast!!", //remember to implement reward!
             challengeDescription: "Expansion effect is ^0.1",
             goalDescription: "placeholder: reach 1e10 points",
             rewardDescription: "Unlock upgrade 2-4 and point gain increased by 50%",
