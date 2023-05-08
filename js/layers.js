@@ -89,7 +89,7 @@ addLayer("p", {
     challenges: {
         11: {
             name: "Too Fast!!", //remember to implement reward!
-            challengeDescription: "Expansion effect is ^0.1",
+            challengeDescription: "Expansion effect is ^0.3",
             goalDescription: "placeholder: reach 1e10 points",
             rewardDescription: "Unlock upgrade 2-4 and point gain increased by 50%",
             canComplete() {return player.points.gte(new Decimal(1e10))},
@@ -116,7 +116,7 @@ addLayer("e", {
     base() {return new Decimal(5).add(player.e.points.add(getResetGain(this.layer)).add(1).log(5))},
     exponent: 1, // Prestige currency exponent
     canBuyMax() {return hasUpgrade('e', 14)},
-    effect() {if(hasUpgrade('e', 12)) {if(inChallenge('p', 11)) {return new Decimal(2).pow(player.e.points.add(1)).pow(0.1)}
+    effect() {if(hasUpgrade('e', 12)) {if(inChallenge('p', 11)) {return new Decimal(2).pow(player.e.points.add(1)).pow(0.3)}
         else {return new Decimal(2).pow(player.e.points.add(1))}
     } else {
         return 1
