@@ -17,6 +17,7 @@ addLayer("p", {
     exponent: 0.5, // Prestige currency exponent
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(2)
+        if(hasUpgrade('e', 11)) mult=mult.times(upgradeEffect('e', 11))
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
@@ -86,4 +87,12 @@ addLayer("e", {
         {key: "e", description: "E: Reset for Expansion points", onPress(){if (canReset(this.layer)) doReset(this.layer)}, unlocked() {return tmp[layer].layerShown;}},
     ],
     layerShown(){return hasUpgrade('p', 14)||player[this.layer].best.gte(1)},
+    upgrades: {
+        11: {
+            description: "Gain 50% more Prestige points",
+            cost: (new Decimal(1)),
+            effect() {return 1.5},
+            effectDisplay() {return "x"+format(upgradeEffect('e', 11))},
+        },
+    },
 })
