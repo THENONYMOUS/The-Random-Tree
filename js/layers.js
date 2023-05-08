@@ -15,6 +15,7 @@ addLayer("p", {
     baseAmount() {return player.points}, // Get the current amount of baseResource
     type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
     exponent: 0.5, // Prestige currency exponent
+    branches: [e, d],
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(2)
         if(hasUpgrade('e', 11)) mult=mult.times(upgradeEffect('e', 11))
@@ -76,9 +77,14 @@ addLayer("p", {
         },
         23: {
             description: "Unlock a challenge",
-            cost: (new Decimal(1e9)),
+            cost: (new Decimal(2e6)),
             unlocked() {return hasUpgrade('p', 22)},
         },
+        24: {
+            description: "Unlock a new layer and increase point gain by 50%",
+            cost: (new Decimal(1e9)),
+            unlocked() {return hasChallenge('p', 11)},
+        }
     },
     challenges: {
         11: {
@@ -107,7 +113,7 @@ addLayer("e", {
     baseResource: "points", // Name of resource prestige is based on
     baseAmount() {return player.points}, // Get the current amount of baseResource
     type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
-    base() {return new Decimal(5).add(player.e.points.add(1).log(5))},
+    base() {return new Decimal(5).add(player.e.points.add(onPrestige(gain)).add(1).log(5))},
     exponent: 1, // Prestige currency exponent
     canBuyMax() {return hasUpgrade('e', 14)},
     effect() {if(hasUpgrade('e', 12)) {if(inChallenge('p', 11)) {return new Decimal(2).pow(player.e.points.add(1)).pow(0.1)}
@@ -155,4 +161,35 @@ addLayer("e", {
             unlocked() {return hasUpgrade('e', 13)},
         },
     },
+}),
+addLayer("d", {
+    name: "Details", // This is optional, only used in a few places, If absent it just uses the layer id.
+    symbol: "D", // This appears on the layer's node. Default is the id with the first letter capitalized
+    position: 1, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
+    startData() { return {
+        unlocked: true,
+		points: new Decimal(0),
+        best: new Decimal(0),
+        total: new Decimal(0),
+    }},
+    color: "#1435FF",
+    requires: new Decimal(1e9), // Can be a function that takes requirement increases into account
+    resource: "Details", // Name of prestige currency
+    baseResource: "Prestige Points", // Name of resource prestige is based on
+    baseAmount() {return player.p.points}, // Get the current amount of baseResource
+    type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
+    base() {return new Decimal(5).add(player.d.points.add(onPrestige(gain)).add(1).log(5))},
+    exponent: 1, // Prestige currency exponent
+        gainMult() { // Calculate the multiplier for main currency from bonuses
+        mult = new Decimal(1)
+        return mult
+    },
+    gainExp() { // Calculate the exponent on main currency from bonuses
+        return new Decimal(1)
+    },
+    row: 1, // Row the layer is in on the tree (0 is the first row)
+    hotkeys: [
+        {key: "d", description: "D: Reset for Details", onPress(){if (canReset(this.layer)) doReset(this.layer)}, unlocked() {return tmp[layer].layerShown;}},
+    ],
+    layerShown(){return hasUpgrade('p', 24)||player[this.layer].best.gte(1)},
 })

@@ -13,11 +13,15 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.2",
-	name: "Pretty Much Nothing",
+	num: "0.3",
+	name: "Probably not Nothing",
 }
 
 let changelog = `<h1>Changelog:</h1><br>
+	<h3>v0.3</h3><br>
+		- Added new layer.<br>
+		- Added 2 total rows of Upgrades.<br>
+		- New Challenge.<br>
 	<h3>v0.2</h3><br>
 		- Finished 1st row of Prestige Upgrades.<br>
 		- Added new Layer.<br>
@@ -51,6 +55,7 @@ function getPointGen() {
 	if(hasUpgrade('p', 14)) gain=gain.times(1.5)
 	if(hasUpgrade('e', 12)) gain=gain.times(tmp.e.effect)
 	if(hasUpgrade('e', 13)) gain=gain.times(upgradeEffect('e', 13))
+	if(hasChallenge('p', 11)) gain=gain.times(1.5)
 	return gain
 }
 
