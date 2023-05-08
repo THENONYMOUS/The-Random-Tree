@@ -19,6 +19,7 @@ addLayer("p", {
         mult = new Decimal(2)
         if(hasUpgrade('e', 11)) mult=mult.times(upgradeEffect('e', 11))
         if(hasUpgrade('p', 21)) mult=mult.times(upgradeEffect('p', 21))
+        if(hasUpgrade('p', 22)) mult=mult.times(upgradeEffect('p', 22))
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
@@ -64,6 +65,14 @@ addLayer("p", {
             effect() {return player.points.add(1).pow(0.1)},
             effectDisplay() {return "x"+format(upgradeEffect('p', 21))},
             tooltip: "(Points + 1)^0.1",
+        },
+        22: {
+            description: "Expansion effect affects Prestige points at a reduced rate",
+            cost: (new Decimal(1000)),
+            unlocked() {return hasUpgrade('p', 21)},
+            effect() {return tmp.e.effect.pow(0.3)},
+            effectDisplay() {return "x"+format(upgradeEffect('p', 22))},
+            tooltip: "Effect ^0.3",
         },
     },
 }),
