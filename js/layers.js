@@ -87,6 +87,7 @@ addLayer("p", {
             goalDescription: "placeholder: reach 1e10 points",
             rewardDescription: "Unlock upgrade 2-4 and point gain increased by 50%",
             canComplete() {return player.points.gte(new Decimal(1e10))},
+            unlocked() {return hasUpgrade('p', 23)},
         },
     },
 }),
