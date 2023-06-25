@@ -155,3 +155,7 @@ function inCompletion(layer, id, completion) {
 function upgradeAmount(layer) {
     return tmp[layer].upgradeAmount
 }
+
+function buyableCost(layer, id) {
+    return tmp[layer].buyables[id].cost
+}

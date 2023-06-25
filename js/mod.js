@@ -13,11 +13,14 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.1 pre",
-	name: "Pre-Release",
+	num: "1",
+	name: "Existence and the Afterlife",
 }
 
 let changelog = `<h1>Changelog:</h1><br>
+	<h3>v1</h3><br>
+		- Added Afterlife with 4 Upgrades, 5 Milestones, 4 Buyables and 5 Achievements.<br>
+		- Added 4 Existence Upgrades.<br>
 	<h3>v0.1</h3><br>
 		- Added Existence with 16 Upgrades and 4 Buyables.<br>
 		- Added Void Growth.`
@@ -47,6 +50,8 @@ function getPointGen() {
     gain = gain.times(smartUpgradeEffect('e', 14))
     gain = gain.times(smartUpgradeEffect('e', 21))
     gain = gain.times(buyableEffect('e', 12))
+    gain = gain.times(smartUpgradeEffect('al', 11))
+    gain = gain.times(buyableEffect('al', 21))
 	return gain
 }
 
@@ -60,7 +65,7 @@ var displayThings = [
 
 // Determines when the game "ends"
 function isEndgame() {
-	return player.points.gte(new Decimal("e280000000"))
+	return hasAchievement('al', 15)
 }
 
 
