@@ -41,6 +41,8 @@ function sumValues(x) {
 }
 
 function format(decimal, precision = 2, small) {
+    if(precision < 2 && ctrlDown) precision = precision + 1
+    if(ctrlDown) precision = precision + 1
     small = small || modInfo.allowSmall
     decimal = new Decimal(decimal)
     if (isNaN(decimal.sign) || isNaN(decimal.layer) || isNaN(decimal.mag)) {

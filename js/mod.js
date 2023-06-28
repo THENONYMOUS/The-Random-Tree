@@ -18,9 +18,9 @@ let VERSION = {
 }
 
 let changelog = `<h1>Changelog:</h1><br>
-	<h3>v1</h3><br>
-		- Added Afterlife with 4 Upgrades, 5 Milestones, 4 Buyables and 5 Achievements.<br>
-		- Added 4 Existence Upgrades.<br>
+    <h3>v1</h3><br>
+        - Added Afterlife with 4 Upgrades, 5 Milestones, 4 Buyables and 5 Achievemnts.<br>
+        - Added 4 Existence Upgrades.<br>
 	<h3>v0.1</h3><br>
 		- Added Existence with 16 Upgrades and 4 Buyables.<br>
 		- Added Void Growth.`
@@ -61,6 +61,7 @@ function addedPlayerData() { return {
 
 // Display extra things at the top of the page
 var displayThings = [
+    () => "CTRL to see precise numbers"
 ]
 
 // Determines when the game "ends"
