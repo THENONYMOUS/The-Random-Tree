@@ -133,6 +133,8 @@ var systemComponents = {
             Made by {{modInfo.author}}	
         </span>
         <br>
+        A Small Test and Experience of Mod Creating<br>
+        <br>
         The Modding Tree <a v-bind:href="'https://github.com/Acamaeda/The-Modding-Tree/blob/master/changelog.md'" target="_blank" class="link" v-bind:style = "{'font-size': '14px', 'display': 'inline'}" >{{TMT_VERSION.tmtNum}}</a> by Acamaeda
         <br>
         The Prestige Tree made by Jacorb and Aarex

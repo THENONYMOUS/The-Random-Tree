@@ -151,3 +151,11 @@ function challengeCanComplete(layer, id) {
 function inCompletion(layer, id, completion) {
     return inChallenge(layer, id) && challengeCompletions(layer, id) == completion
 }
+
+function upgradeAmount(layer) {
+    return tmp[layer].upgradeAmount
+}
+
+function smartAchievementEffect(layer, id, def = 1) {
+    return new Decimal(hasAchievement(layer, id) ? achievementEffect(layer, id) : def)
+}

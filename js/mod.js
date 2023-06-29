@@ -1,26 +1,26 @@
 let modInfo = {
-	name: "The ??? Tree",
-	id: "mymod",
-	author: "nobody",
+	name: "The Food Chain",
+	id: "thenonymous-thefoodchain-96459356",
+	author: "Thenonymous",
 	pointsName: "points",
 	modFiles: ["layers.js", "tree.js"],
 
 	discordName: "",
 	discordLink: "",
-	initialStartPoints: new Decimal (10), // Used for hard resets and new players
+	initialStartPoints: new Decimal (0), // Used for hard resets and new players
 	offlineLimit: 1,  // In hours
 }
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.0",
-	name: "Literally nothing",
+	num: "1",
+	name: "Game",
 }
 
 let changelog = `<h1>Changelog:</h1><br>
-	<h3>v0.0</h3><br>
-		- Added things.<br>
-		- Added stuff.`
+	<h3>v1</h3><br>
+		- Added Ingredients.<br>
+		- Added Meals.`
 
 let winText = `Congratulations! You have reached the end and beaten this game, but for now...`
 
@@ -43,11 +43,21 @@ function getPointGen() {
 		return new Decimal(0)
 
 	let gain = new Decimal(1)
+    gain = gain.times(smartUpgradeEffect('i', 11))
+    gain = gain.times(smartUpgradeEffect('i', 13))
+    gain = gain.times(buyableEffect('i', 12))
+    gain = gain.times(smartUpgradeEffect('i', 21))
+    gain = gain.times(smartUpgradeEffect('i', 22))
+    gain = gain.times(smartAchievementEffect('m', 11))
+    gain = gain.times(smartAchievementEffect('m', 12))
 	return gain
 }
 
 // You can add non-layer related variables that should to into "player" and be saved here, along with default values
 function addedPlayerData() { return {
+    shownLayers: [
+        'i',
+    ],
 }}
 
 // Display extra things at the top of the page
@@ -56,7 +66,7 @@ var displayThings = [
 
 // Determines when the game "ends"
 function isEndgame() {
-	return player.points.gte(new Decimal("e280000000"))
+	return hasAchievement('m', 23)
 }
 
 
