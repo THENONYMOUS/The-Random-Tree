@@ -1,7 +1,7 @@
 let modInfo = {
-	name: "The ??? Tree",
-	id: "mymod",
-	author: "nobody",
+	name: "The Test Tree",
+	id: "holyfrickitsthenonymous-thetesttree0947529075",
+	author: "THRNONYMYOUS",
 	pointsName: "points",
 	modFiles: ["layers.js", "tree.js"],
 
@@ -42,7 +42,24 @@ function getPointGen() {
 	if(!canGenPoints())
 		return new Decimal(0)
 
-	let gain = new Decimal(1)
+	let gain = new Decimal(0)
+    gain = gain.add(buyableEffect('p', 11))
+    gain = gain.mul(buyableEffect('p', 12))
+    gain = gain.mul(buyableEffect('p', 22))
+    gain = gain.mul(buyableEffect('p', 31))
+    gain = gain.mul(buyableEffect('u', 11))
+    gain = gain.mul(smartUpgradeEffect('p', 11))
+    gain = gain.mul(smartUpgradeEffect('p', 12))
+    gain = gain.mul(smartUpgradeEffect('p', 13))
+    gain = gain.mul(smartUpgradeEffect('p', 14))
+    gain = gain.mul(smartUpgradeEffect('p', 21))
+    gain = gain.mul(smartUpgradeEffect('p', 22))
+    gain = gain.mul(smartUpgradeEffect('p', 23))
+    gain = gain.mul(smartUpgradeEffect('p', 31))
+    gain = gain.mul(smartUpgradeEffect('p', 32))
+    gain = gain.mul(smartUpgradeEffect('p', 33))
+    gain = gain.mul(smartMilestoneEffect('p', 4))
+    gain = gain.mul(player.p.energy.max(0).add(1).root(10))
 	return gain
 }
 

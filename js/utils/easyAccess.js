@@ -85,7 +85,7 @@ function thisUpgradeEffect(thisUpgrade) {
 } // Returns the effect of the current upgrade (the upgrade which you are setting the properties of)
 
 function autoBuyableDisplay(desc, layer, id, baseName = "", limit = "") {
-    return (desc + "<br>Cost: "+ (tmp[layer].buyables[id].cost.lt(0.1) ? formatSmall(tmp[layer].buyables[id].cost) : format(tmp[layer].buyables[id].cost)) +baseName+". Amount: "+ format(getBuyableAmount(layer, id)) + limit +". ")
+    return (desc + "<br>Cost: "+ (tmp[layer].buyables[id].cost.lt(0.1) ? formatSmall(tmp[layer].buyables[id].cost) : format(tmp[layer].buyables[id].cost)) +baseName+". <br>Amount: "+ formatWhole(getBuyableAmount(layer, id)) + limit +". <br>Effective Levels: "+formatWhole(tmp[layer].buyables[id].amount)+". ")
 } // Returns a buyable display from just a description
 
 function thisBuyableAmount(thisBuyable) {
