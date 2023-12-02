@@ -1,26 +1,26 @@
 let modInfo = {
-	name: "The ??? Tree",
-	id: "mymod",
-	author: "nobody",
+	name: "Intreegue",
+	id: "yoyoyo-its-thenonymous-with-the-booster-tree!-skull-emoji-hahaidobemakintheiduniquetho-yhhypojojveorhvalksjdlajfhvejnnjjnfkjkjwr0438y349857",
+	author: "Thenonymous",
 	pointsName: "points",
-	modFiles: ["layers.js", "tree.js"],
+	modFiles: ["junkyard.js", "basement.js", "extra.js", "tree.js"],
 
 	discordName: "",
 	discordLink: "",
-	initialStartPoints: new Decimal (10), // Used for hard resets and new players
+	initialStartPoints: new Decimal (0), // Used for hard resets and new players
 	offlineLimit: 1,  // In hours
 }
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.0",
-	name: "Literally nothing",
+	num: "1",
+	name: "Boosters",
 }
 
 let changelog = `<h1>Changelog:</h1><br>
-	<h3>v0.0</h3><br>
-		- Added things.<br>
-		- Added stuff.`
+	<h3>v1</h3><br>
+		- Added boosters.<br>
+		- Added more boosters.<br>`
 
 let winText = `Congratulations! You have reached the end and beaten this game, but for now...`
 
@@ -43,20 +43,30 @@ function getPointGen() {
 		return new Decimal(0)
 
 	let gain = new Decimal(1)
+	gain = gain.mul(tmp.b1.effect)
+	gain = gain.mul(tmp.b2.effect)
+	gain = gain.mul(tmp.b3.effect)
+	gain = gain.mul(player.basementPoints.max(10).log(10))
+	//gain = gain.mul(buyableEffect('j', 12))
+
+	gain = gain.div("1e10").pow(player.points.max(1).log(10).div(20).min(1)).mul("1e10").min(gain)
 	return gain
 }
 
 // You can add non-layer related variables that should to into "player" and be saved here, along with default values
 function addedPlayerData() { return {
+	basementPoints: new Decimal(0),
 }}
 
 // Display extra things at the top of the page
 var displayThings = [
+	() => {return "Endgame is at <h2 style='color: #AAAAFF'>1e25</h2> points"},
+	() => {return tmp.pointGen.gte("1e10") && player.points.lt("1e20") && player.points.gte("1e10") ? "Past 1e10 Points/sec your point gain is raised to "+format(player.points.max(1).log(10).div(20).min(1))+", this is effect weakens with more points" : null}
 ]
 
 // Determines when the game "ends"
 function isEndgame() {
-	return player.points.gte(new Decimal("e280000000"))
+	return false
 }
 
 
