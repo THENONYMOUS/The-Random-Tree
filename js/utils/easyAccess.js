@@ -151,3 +151,22 @@ function challengeCanComplete(layer, id) {
 function inCompletion(layer, id, completion) {
     return inChallenge(layer, id) && challengeCompletions(layer, id) == completion
 }
+
+function upgradeRow(layer, row) {
+    return player[layer].upgrades.filter(item => Math.floor(item/10) == row).length
+}
+
+function upgradeBranches(layer, required = [], req1 = [], override = false) {
+    let requiredAmt = required.length
+    let object = {
+        canAfford() {return (required.filter(item => hasUpgrade(layer, item)).length >= requiredAmt) && (req1.filter(item => hasUpgrade(layer, item)).length >= 1 || req1.length < 1) || override},
+        unlocked() {return (required.filter(item => hasUpgrade(layer, item)).length >= 1) || (req1.filter(item => hasUpgrade(layer, item)).length >= 1) || override},
+        branches() {
+            let branches = required;
+            if(req1.filter(item => hasUpgrade(layer, item)).length < 1) branches = branches.concat(req1);
+            else branches = branches.concat((req1.filter(item => hasUpgrade(layer, item))));
+            return branches;
+        },
+    }
+    return object
+}
