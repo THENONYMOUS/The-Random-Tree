@@ -13,11 +13,13 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "1",
-	name: "Generations",
+	num: "2",
+	name: "Species",
 }
 
 let changelog = `<h1>Changelog:</h1><br>
+	<h3>v2: Species</h3><br>
+		- Added Species, containing an upgrade tree.<br>
 	<h3>v1: Generations</h3><br>
 		- Added Generations, containing an upgrade tree.<br>
 		- Added Mitochondria, a sub-section of Generations.`
@@ -51,9 +53,16 @@ function getPointGen() {
 	gain = gain.mul(smartUpgradeEffect('ge', 31))
 	gain = gain.mul(smartUpgradeEffect('ge', 33))
 	gain = gain.mul(smartUpgradeEffect('ge', 41))
+	gain = gain.mul(smartUpgradeEffect('sp', 11))
+	gain = gain.mul(smartUpgradeEffect('sp', 21))
+	gain = gain.mul(smartUpgradeEffect('sp', 22))
+	if(hasUpgrade('ge', 92) && hasUpgrade('sp', 31)) gain = gain.mul(5)
+	gain = gain.mul(smartUpgradeEffect('sp', 41))
+	gain = gain.mul(smartUpgradeEffect('sp', 42))
+	gain = gain.mul(smartUpgradeEffect('sp', 51))
 
-	gain = gain.div(player.ge.points.pow(2).add(1))
-	gain = gain.sub(player.ge.points.pow(2).div(100))
+	gain = gain.div(player.ge.points.mul(tmp.sp.effect.genNerf).pow(2).add(1))
+	gain = gain.sub(player.ge.points.mul(tmp.sp.effect.genNerf).pow(2).div(100))
 	return gain.max(0)
 }
 
@@ -63,8 +72,8 @@ function addedPlayerData() { return {
 
 // Display extra things at the top of the page
 var displayThings = [
-	"You are playing The Plant Roots v1",
-	function() {return hasUpgrade('ge', 101) ? "You are past endgame. Congratulations, but The Plant Roots does not have any content past this point." : "There's still more content to discover..."},
+	"You are playing The Plant Roots v2",
+	function() {return hasUpgrade('sp', 71) ? "You are past endgame. Congratulations, but The Plant Roots does not have any content past this point." : "There's still more content to discover..."},
 ]
 
 // Determines when the game "ends"

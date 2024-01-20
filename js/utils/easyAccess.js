@@ -170,3 +170,11 @@ function upgradeBranches(layer, required = [], req1 = [], override = false) {
     }
     return object
 }
+
+function upgCurrencySetup(layer = null, id = "points", name = "") {
+    return {
+        currencyLayer: layer,
+        currencyInternalName: id,
+        currencyDisplayName: name,
+    }
+}
