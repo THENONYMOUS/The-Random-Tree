@@ -1,28 +1,29 @@
 let modInfo = {
-	name: "The ??? Tree",
-	id: "mymod",
-	author: "nobody",
-	pointsName: "points",
-	modFiles: ["layers.js", "tree.js"],
+	name: "The SymmeTree",
+	id: "Ibetnoonehasthisidbutjusttomakesureheressomespamlsaiudlaasldiufdsadlghdjkcgjkggsaioeras",
+	author: "Thenonymous",
+	pointsName: "permutations",
+	modFiles: ["layers.js", "layersSide.js", "tree.js"],
 
 	discordName: "",
 	discordLink: "",
-	initialStartPoints: new Decimal (10), // Used for hard resets and new players
+	initialStartPoints: new Decimal (0), // Used for hard resets and new players
 	offlineLimit: 1,  // In hours
 }
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.0",
-	name: "Literally nothing",
+	num: "1",
+	name: "Groups",
 }
 
 let changelog = `<h1>Changelog:</h1><br>
-	<h3>v0.0</h3><br>
-		- Added things.<br>
-		- Added stuff.`
+	<h3>v1</h3><br>
+		- Permutations<br>
+		- Data<br>
+		- Groups<br>`
 
-let winText = `Congratulations! You have reached the end and beaten this game, but for now...`
+let winText = `Congratulations!`
 
 // If you add new functions anywhere inside of a layer, and those functions have an effect when called, add them here.
 // (The ones here are examples, all official functions are already taken care of)
@@ -42,21 +43,56 @@ function getPointGen() {
 	if(!canGenPoints())
 		return new Decimal(0)
 
-	let gain = new Decimal(1)
+	let gain = new Decimal(0.25)
+	
+	gain = gain.mul(smartUpgradeEffect('d', 13))
+	gain = gain.mul(smartUpgradeEffect('d', 23))
+	gain = gain.mul(smartUpgradeEffect('d', 31))
+	gain = gain.mul(smartUpgradeEffect('d', 34))
+	gain = gain.mul(buyableEffect('d', 11))
+	gain = gain.mul(smartUpgradeEffect('g', 12))
+
+	gain = gain.mul(player.g.variables.variable1)
+	if(hasUpgrade('g', 14)) gain = gain.mul(player.g.variables.variable1.root(2))
+
 	return gain
+}
+
+// Function to implement custom parts of gameLoop()
+function gameLoopExtension() {
+	player.hardcap = findHardcap()
+	player.points = player.points.min(player.hardcap)
+}
+
+// Point hardcap
+function findHardcap() {
+	let cap = new Decimal(1)
+
+	cap = cap.mul(smartUpgradeEffect('d', 11))
+	cap = cap.mul(smartUpgradeEffect('d', 12))
+	cap = cap.mul(smartUpgradeEffect('d', 14))
+	cap = cap.mul(tmp.g.effect.effect1)
+
+	cap = cap.div(player.g.variables.variable1)
+
+	return cap
 }
 
 // You can add non-layer related variables that should to into "player" and be saved here, along with default values
 function addedPlayerData() { return {
+	hardcap: new Decimal(1)
 }}
 
 // Display extra things at the top of the page
 var displayThings = [
+	function() {
+		return "You stop finding permutations at " + format(player.hardcap) + " permutations"
+	},
 ]
 
 // Determines when the game "ends"
 function isEndgame() {
-	return player.points.gte(new Decimal("e280000000"))
+	return player.d.points.gte(87)
 }
 
 
